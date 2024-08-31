@@ -45,6 +45,25 @@ export const JaneDriveMainstats: AgentDriveMainstatCount = {
 }
 
 export const JaneBuffs: BuffValues = {
+  assistDamagePercent: 0,
+  basicDamagePercent: 0,
+  basicDef: 0,
+  basicDefPercent: 0,
+  basicHp: 0,
+  basicHpPercent: 0,
+  critDmg: 0,
+  critRate: 0,
+  dashDamagePercent: 0,
+  finalDef: 0,
+  finalDefPercent: 0,
+  finalHp: 0,
+  finalHpPercent: 0,
+  penFlat: 0,
+  penPercent: 0.32,
+  resShred: 0,
+  skillDamagePercent: 0,
+  stunBonus: 0,
+  ultimateDamagePercent: 0,
   basicAtkPercent: 0,
   basicAtkFlat: 0,
 
@@ -55,5 +74,6 @@ export const JaneBuffs: BuffValues = {
   // TODO this is also variable based on passives. It also needs to take from wengine.
   attributeDamagePercent: 0.55,
 
-  dmgTaken: 0
+  dmgTaken: 0,
+  defShred: 0
 }
