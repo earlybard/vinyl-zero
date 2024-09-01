@@ -6,12 +6,12 @@ import {JaneDoe} from "@/app/zzz/agents/janeDoe";
 import Typography from "@mui/material/Typography";
 import {MainstatMultipliers, SubstatMultipliers} from "@/app/zzz/constants/statMultipliers";
 import AgentSelector from "@/app/components/AgentSelector";
+import {useAppSelector} from "@/lib/store/hooks";
 
 export default function OrdersPage() {
 
-  const [damagePercent, setDamagePercent] = useState(0);
+  const agent = useAppSelector(s => s.agent.selectedAgent)
 
-  const agent = JaneDoe
   const baseStats = agent.baseStats
   const mainstatCount = agent.mainstatCount
   const substatCount = agent.substatCount
@@ -130,12 +130,6 @@ export default function OrdersPage() {
       </Grid2>
       <Typography sx={{ p: 2 }}>Attack Scale is multiplied by skill values for the final damage per hit</Typography>
       <TextField label="Attack Scale" value={attackScale}/>
-    {/*<TextField*/}
-    {/*  label="Damage %"*/}
-    {/*  value={damagePercent}*/}
-    {/*  type={"number"}*/}
-    {/*  onChange={e => setDamagePercent(parseFloat(e.target.value))}*/}
-    {/*/>*/}
     </>
   );
 }

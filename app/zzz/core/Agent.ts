@@ -2,8 +2,12 @@ import {AgentDriveMainstatCount, AgentDriveSubstatCount, DriveMainstat} from "@/
 import {BuffValues} from "@/app/zzz/stats/buffs";
 import {AgentBaseStats} from "@/app/zzz/stats/baseStats";
 
+export type AgentName =
+  "Jane Doe" |
+  "Zhu Yuan"
+
 export interface Agent {
-  label: string
+  label: AgentName
   baseStats: AgentBaseStats
   // TODO store mainstats with their multipliers rather than storing counts here
   mainstatCount: AgentDriveMainstatCount

@@ -7,6 +7,7 @@ import type { Navigation } from '@toolpad/core';
 import { SessionProvider, signIn, signOut } from 'next-auth/react';
 import { auth } from '../auth';
 import theme from '../theme';
+import StoreProvider from "@/app/StoreProvider";
 
 const NAVIGATION: Navigation = [
   {
@@ -40,19 +41,21 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <SessionProvider session={session}>
-          <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-            <AppProvider
-              navigation={NAVIGATION}
-              branding={BRANDING}
-              session={session}
-              authentication={AUTHENTICATION}
-              theme={theme}
-            >
-              {props.children}
-            </AppProvider>
-          </AppRouterCacheProvider>
-        </SessionProvider>
+        <StoreProvider>
+          <SessionProvider session={session}>
+            <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+              <AppProvider
+                navigation={NAVIGATION}
+                branding={BRANDING}
+                session={session}
+                authentication={AUTHENTICATION}
+                theme={theme}
+              >
+                {props.children}
+              </AppProvider>
+            </AppRouterCacheProvider>
+          </SessionProvider>
+        </StoreProvider>
       </body>
     </html>
   );
