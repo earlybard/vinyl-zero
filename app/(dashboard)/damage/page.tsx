@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import {MainstatMultipliers, SubstatMultipliers} from "@/app/zzz/constants/statMultipliers";
 import AgentSelector from "@/app/components/AgentSelector";
 import {useAppSelector} from "@/lib/store/hooks";
+import {AnomalyMultipliers, AnomalyType} from "@/app/zzz/constants/anomaly";
 
 export default function OrdersPage() {
 
@@ -104,6 +105,14 @@ export default function OrdersPage() {
     ANOMALY_BUFF_LEVEL *
     finalAttack
 
+  const anomalyDamage: Record<AnomalyType, number> = {
+    shatter: anomaly * AnomalyMultipliers.shatter,
+    assault: anomaly * AnomalyMultipliers.assault,
+    burn: anomaly * AnomalyMultipliers.burn,
+    corruption: anomaly * AnomalyMultipliers.corruption,
+    shock: anomaly * AnomalyMultipliers.shock
+  }
+
   // Final anomaly damage:
   // Fill in how many procs of each anomaly will happen.
   // Calculate damage for each.
@@ -114,22 +123,27 @@ export default function OrdersPage() {
       <AgentSelector/>
       <Divider sx={{ pt: 2 }}/>
       <Grid2 container spacing={2} sx={{ pt: 2 }}>
-        <TextField label="Base Attack" value={baseAttack}/>
-        <TextField label="Basic Attack" value={basicAttack}/>
-        <TextField label="Final Attack" value={finalAttack}/>
-        <TextField label="Flat Pen" value={penFlat}/>
-        <TextField label="Pen Ratio" value={penRatio}/>
-        <TextField label="Def Multiplier" value={defMultiplier}/>
-        <TextField label="Attribute Damage %" value={attributeDamagePercent}/>
-        <TextField label="Crit Rate" value={critRate}/>
-        <TextField label="Crit Dmg" value={critDmg}/>
-        <TextField label="Crit Multiplier" value={critMultiplier}/>
-        <TextField label="Res Multiplier" value={resMultiplier}/>
-        <TextField label="Anomaly" value={anomaly}/>
-        <TextField label="AP Bonus" value={apBonus}/>
+        <TextField label="Base Attack" value={Math.round(baseAttack)}/>
+        <TextField label="Basic Attack" value={Math.round(basicAttack)}/>
+        <TextField label="Final Attack" value={Math.round(finalAttack)}/>
+        <TextField label="Flat Pen" value={Math.round(penFlat)}/>
+        <TextField label="Pen Ratio" value={(penRatio)}/>
+        <TextField label="Def Multiplier" value={(defMultiplier.toFixed(2))}/>
+        <TextField label="Attribute Damage %" value={(attributeDamagePercent)}/>
+        <TextField label="Crit Rate" value={(critRate.toFixed(2))}/>
+        <TextField label="Crit Dmg" value={(critDmg.toFixed(2))}/>
+        <TextField label="Crit Multiplier" value={(critMultiplier.toFixed(2))}/>
+        <TextField label="Res Multiplier" value={(resMultiplier)}/>
+        <TextField label="Anomaly" value={Math.round(anomaly)}/>
+        <TextField label="AP Bonus" value={Math.round(apBonus)}/>
+        <TextField label="Assault Damage" value={Math.round(anomalyDamage.assault)}/>
+        <TextField label="Shatter Damage" value={Math.round(anomalyDamage.shatter)}/>
+        <TextField label="Burn Damage" value={Math.round(anomalyDamage.burn)}/>
+        <TextField label="Corruption Damage" value={Math.round(anomalyDamage.corruption)}/>
+        <TextField label="Shock Damage" value={Math.round(anomalyDamage.shock)}/>
       </Grid2>
       <Typography sx={{ p: 2 }}>Attack Scale is multiplied by skill values for the final damage per hit</Typography>
-      <TextField label="Attack Scale" value={attackScale}/>
+      <TextField label="Attack Scale" value={Math.round(attackScale)}/>
     </>
   );
 }
