@@ -2,7 +2,7 @@ import * as React from 'react';
 import { AppProvider } from '@toolpad/core/nextjs';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import PercentIcon from '@mui/icons-material/Percent';
 import type { Navigation } from '@toolpad/core';
 import { SessionProvider, signIn, signOut } from 'next-auth/react';
 import { auth } from '../auth';
@@ -19,9 +19,9 @@ const NAVIGATION: Navigation = [
     icon: <DashboardIcon />,
   },
   {
-    segment: 'orders',
-    title: 'Orders',
-    icon: <ShoppingCartIcon />,
+    segment: 'damage',
+    title: 'Damage',
+    icon: <PercentIcon />,
   },
 ];
 
