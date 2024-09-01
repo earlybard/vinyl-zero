@@ -8,4 +8,4 @@ const theme = {
   dark: darkTheme
 };
 
-export default theme;
+export default darkTheme;
