@@ -9,7 +9,7 @@ import AgentSelector from "@/app/components/AgentSelector";
 import {useAppSelector} from "@/lib/store/hooks";
 import {AnomalyMultipliers, AnomalyType} from "@/app/zzz/constants/anomaly";
 
-export default function OrdersPage() {
+export default function DamagePage() {
 
   const agent = useAppSelector(s => s.agent.selectedAgent)
 
@@ -105,6 +105,7 @@ export default function OrdersPage() {
     ANOMALY_BUFF_LEVEL *
     finalAttack
 
+  // TODO JD does anomaly crits. This needs to be incorporated in buffs.
   const anomalyDamage: Record<AnomalyType, number> = {
     shatter: anomaly * AnomalyMultipliers.shatter,
     assault: anomaly * AnomalyMultipliers.assault,
@@ -120,30 +121,33 @@ export default function OrdersPage() {
 
   return (
     <>
-      <AgentSelector/>
       <Divider sx={{ pt: 2 }}/>
       <Grid2 container spacing={2} sx={{ pt: 2 }}>
-        <TextField label="Base Attack" value={Math.round(baseAttack)}/>
-        <TextField label="Basic Attack" value={Math.round(basicAttack)}/>
-        <TextField label="Final Attack" value={Math.round(finalAttack)}/>
-        <TextField label="Flat Pen" value={Math.round(penFlat)}/>
-        <TextField label="Pen Ratio" value={(penRatio)}/>
-        <TextField label="Def Multiplier" value={(defMultiplier.toFixed(2))}/>
-        <TextField label="Attribute Damage %" value={(attributeDamagePercent)}/>
-        <TextField label="Crit Rate" value={(critRate.toFixed(2))}/>
-        <TextField label="Crit Dmg" value={(critDmg.toFixed(2))}/>
-        <TextField label="Crit Multiplier" value={(critMultiplier.toFixed(2))}/>
-        <TextField label="Res Multiplier" value={(resMultiplier)}/>
-        <TextField label="Anomaly" value={Math.round(anomaly)}/>
-        <TextField label="AP Bonus" value={Math.round(apBonus)}/>
-        <TextField label="Assault Damage" value={Math.round(anomalyDamage.assault)}/>
-        <TextField label="Shatter Damage" value={Math.round(anomalyDamage.shatter)}/>
-        <TextField label="Burn Damage" value={Math.round(anomalyDamage.burn)}/>
-        <TextField label="Corruption Damage" value={Math.round(anomalyDamage.corruption)}/>
-        <TextField label="Shock Damage" value={Math.round(anomalyDamage.shock)}/>
+        <TextField disabled label="Base Attack" value={Math.round(baseAttack)}/>
+        <TextField disabled label="Basic Attack" value={Math.round(basicAttack)}/>
+        <TextField disabled label="Final Attack" value={Math.round(finalAttack)}/>
+        <TextField disabled label="Flat Pen" value={Math.round(penFlat)}/>
+        <TextField disabled label="Pen Ratio" value={(penRatio)}/>
+        <TextField disabled label="Def Multiplier" value={(defMultiplier.toFixed(2))}/>
+        <TextField disabled label="Attribute Damage %" value={(attributeDamagePercent)}/>
+        <TextField disabled label="Crit Rate" value={(critRate.toFixed(2))}/>
+        <TextField disabled label="Crit Dmg" value={(critDmg.toFixed(2))}/>
+        <TextField disabled label="Crit Multiplier" value={(critMultiplier.toFixed(2))}/>
+        <TextField disabled label="Res Multiplier" value={(resMultiplier)}/>
+        <TextField disabled label="Anomaly" value={Math.round(anomaly)}/>
+        <TextField disabled label="AP Bonus" value={Math.round(apBonus)}/>
       </Grid2>
+      <Divider sx={{ pt: 2 }}/>
+      <Grid2 container spacing={2} sx={{ pt: 2 }}>
+        <TextField disabled label="Assault Damage" value={Math.round(anomalyDamage.assault)}/>
+        <TextField disabled label="Shatter Damage" value={Math.round(anomalyDamage.shatter)}/>
+        <TextField disabled label="Burn Damage" value={Math.round(anomalyDamage.burn)}/>
+        <TextField disabled label="Corruption Damage" value={Math.round(anomalyDamage.corruption)}/>
+        <TextField disabled label="Shock Damage" value={Math.round(anomalyDamage.shock)}/>
+      </Grid2>
+      <Divider sx={{ pt: 2 }}/>
       <Typography sx={{ p: 2 }}>Attack Scale is multiplied by skill values for the final damage per hit</Typography>
-      <TextField label="Attack Scale" value={Math.round(attackScale)}/>
+      <TextField disabled label="Attack Scale" value={Math.round(attackScale)}/>
     </>
   );
 }
