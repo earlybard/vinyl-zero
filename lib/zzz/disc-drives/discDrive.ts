@@ -1,20 +1,14 @@
 import {AgentBaseStat} from "@/lib/zzz/stats/baseStats";
-import {DriveMainstat, DriveSubstat} from "@/lib/zzz/stats/discStats";
+import {DriveMainstat, DriveSubstat, ODriveSubstat} from "@/lib/zzz/stats/discStats";
 
 export interface DiscDrive {
   mainStat: DriveMainstat | null
-  subStat1: DriveSubstat | null
-  subStat2: DriveSubstat | null
-  subStat3: DriveSubstat | null
-  subStat4: DriveSubstat | null
+  subStats: DriveSubstat[]
 }
 
 export const DefaultDiscValues: DiscDrive = {
   mainStat: null,
-  subStat1: null,
-  subStat2: null,
-  subStat3: null,
-  subStat4: null
+  subStats: []
 }
 
 export type AgentDiscDrives = [

@@ -10,17 +10,8 @@ export default function DiscsPage() {
 
   return (
     <Grid2 container spacing={2}>
-      <Grid2 size={3}>
-        <DiscSubstatSelector disc={0} stat="subStat1"/>
-      </Grid2>
-      <Grid2 size={3}>
-        <DiscSubstatSelector disc={0} stat="subStat2"/>
-      </Grid2>
-      <Grid2 size={3}>
-        <DiscSubstatSelector disc={0} stat="subStat3"/>
-      </Grid2>
-      <Grid2 size={3}>
-        <DiscSubstatSelector disc={0} stat="subStat4"/>
+      <Grid2 size={6}>
+        <DiscSubstatSelector disc={0}/>
       </Grid2>
     </Grid2>
   )
