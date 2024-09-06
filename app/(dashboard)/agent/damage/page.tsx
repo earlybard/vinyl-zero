@@ -6,8 +6,8 @@ import {JaneDoe} from "@/app/zzz/agents/janeDoe";
 import Typography from "@mui/material/Typography";
 import {MainstatMultipliers, SubstatMultipliers} from "@/app/zzz/constants/statMultipliers";
 import AgentSelector from "@/app/components/AgentSelector";
-import {useAppSelector} from "@/lib/store/hooks";
 import {AnomalyMultipliers, AnomalyType} from "@/app/zzz/constants/anomaly";
+import {useAppSelector} from "@/lib/store/util/hooks";
 
 export default function DamagePage() {
 

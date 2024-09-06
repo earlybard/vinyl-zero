@@ -1,8 +1,8 @@
 "use client";
 import {Autocomplete, TextField} from "@mui/material";
-import {agentActions} from "@/lib/store/slices/agentSlice";
-import {useAppDispatch, useAppSelector} from "@/lib/store/hooks";
 import {useState} from "react";
+import {useAppDispatch, useAppSelector} from "@/lib/store/util/hooks";
+import {agentActions} from "@/lib/store/agentStore";
 
 /**
  * Drop-down list to select an Agent

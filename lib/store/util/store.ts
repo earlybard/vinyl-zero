@@ -1,13 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
-import {agentReducer} from "@/lib/store/slices/agentSlice";
-import {useDispatch, useSelector} from "react-redux";
+import {agentReducer} from "@/lib/store/agentStore";
 
 export const makeStore = () => {
-  return configureStore({
-    reducer: {
-      agent: agentReducer
-    },
-  })
+    return configureStore({
+        reducer: {
+            agent: agentReducer
+        },
+    })
 }
 
 // Infer the type of makeStore
