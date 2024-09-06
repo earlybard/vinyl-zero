@@ -40,21 +40,24 @@ export const DefaultAgentDriveSubstatCount: AgentDriveSubstatCount = {
   penFlat: 0
 }
 
-export type DriveMainstat =
-  "critDmg" |
-  "critRate" |
-  "atkFlat" |
-  "atkPercent" |
-  "hpFlat" |
-  "hpPercent" |
-  "defFlat" |
-  "defPercent" |
-  "anomalyProficiency" |
-  "anomalyMastery" |
-  "energyRegen" |
-  "impact" |
-  "attributeDamagePercent" |
-  "penRatio"
+export const ODriveMainstat = {
+  critDmg:  "Crit Damage",
+  critRate:  "Crit Rate",
+  atkFlat:  "Atk",
+  atkPercent:  "Atk %",
+  hpFlat:  "HP",
+  hpPercent:  "HP %",
+  defFlat:  "Def",
+  defPercent:  "Def %",
+  anomalyProficiency:  "Anomaly Proficiency",
+  anomalyMastery:  "Anomaly Mastery",
+  energyRegen:  "Energy Regen %",
+  impact: "Impact %",
+  attributeDamagePercent: "Attribute Damage %",
+  penRatio:  "Pen Ratio",
+}
+
+export type DriveMainstat = typeof ODriveMainstat[keyof typeof ODriveMainstat];
 
 export type AgentDriveMainstatCount = Record<DriveMainstat, number>
 

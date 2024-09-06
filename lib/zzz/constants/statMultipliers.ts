@@ -1,6 +1,6 @@
-import {DriveMainstat, DriveSubstat} from "@/lib/zzz/stats/discStats";
+import {DriveMainstat, DriveSubstat, DriveSubstatKey} from "@/lib/zzz/stats/discStats";
 
-export const SubstatMultipliers: Record<DriveSubstat, number> = {
+export const SubstatMultipliers: Record<DriveSubstatKey, number> = {
   anomalyProficiency: 9,
   atkFlat: 19,
   atkPercent: 0.03,

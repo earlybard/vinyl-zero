@@ -1,13 +1,10 @@
 "use client";
 import * as React from 'react';
-import {useState} from "react";
 import {Divider, Grid2, TextField} from "@mui/material";
-import {JaneDoe} from "@/app/zzz/agents/janeDoe";
 import Typography from "@mui/material/Typography";
-import {MainstatMultipliers, SubstatMultipliers} from "@/app/zzz/constants/statMultipliers";
-import AgentSelector from "@/app/components/AgentSelector";
-import {AnomalyMultipliers, AnomalyType} from "@/app/zzz/constants/anomaly";
 import {useAppSelector} from "@/lib/store/util/hooks";
+import {MainstatMultipliers, SubstatMultipliers} from "@/lib/zzz/constants/statMultipliers";
+import {AnomalyMultipliers, AnomalyType} from "@/lib/zzz/constants/anomaly";
 
 export default function DamagePage() {
 

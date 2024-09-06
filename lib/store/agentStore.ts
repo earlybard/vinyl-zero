@@ -33,8 +33,8 @@ export const agentSlice = createSlice({
                 state.selectedAgent = selectedAgent
             }
         },
-        updateDisc: (state, payload: PayloadAction<{ idx: number, drive: DiscDrive }>) => {
-            state.selectedAgent.discDrives[payload.payload.idx] = payload.payload.drive
+        updateDisc: (state, payload: PayloadAction<{ i: number, drive: DiscDrive }>) => {
+            state.selectedAgent.discDrives[payload.payload.i] = payload.payload.drive
         }
     }
 })
