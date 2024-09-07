@@ -1,7 +1,7 @@
 import * as React from "react";
 import {AutocompleteOwnerState, AutocompleteRenderOptionState} from "@mui/material/Autocomplete/Autocomplete";
 import {Grid2, Rating} from "@mui/material";
-import {DriveSubstat} from "@/lib/zzz/stats/discStats";
+import {DriveSubstatOption} from "@/lib/zzz/stats/discStats";
 import {SubstatLevel} from "@/lib/zzz/disc-drives/discDrive";
 
 export const renderSubstatOption = (

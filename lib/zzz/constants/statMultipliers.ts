@@ -1,4 +1,4 @@
-import {DriveMainstat, DriveSubstat, DriveSubstatKey} from "@/lib/zzz/stats/discStats";
+import {DriveMainstat, DriveSubstatOption, DriveSubstatKey} from "@/lib/zzz/stats/discStats";
 
 export const SubstatMultipliers: Record<DriveSubstatKey, number> = {
   anomalyProficiency: 9,

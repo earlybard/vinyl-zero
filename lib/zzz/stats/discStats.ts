@@ -10,6 +10,8 @@
 //   "penFlat" |
 //   "anomalyProficiency"
 
+import {DriveSubstat} from "@/lib/zzz/disc-drives/discDrive";
+
 export const ODriveSubstat = {
   critDmg:  "Crit Damage",
   critRate:  "Crit Rate",
@@ -23,9 +25,13 @@ export const ODriveSubstat = {
   anomalyProficiency:  "Anomaly Proficiency"
 }
 
-export type DriveSubstat = typeof ODriveSubstat[keyof typeof ODriveSubstat];
+export const SubstatOptions: DriveSubstat[] = Object.values(ODriveSubstat).map(s =>
+  {return {label: s, level: 0}}
+)
 
-export type AgentDriveSubstatCount = Record<DriveSubstat, number>
+export type DriveSubstatOption = typeof ODriveSubstat[keyof typeof ODriveSubstat];
+
+export type AgentDriveSubstatCount = Record<DriveSubstatOption, number>
 
 export const DefaultAgentDriveSubstatCount: AgentDriveSubstatCount = {
   critDmg: 0,
