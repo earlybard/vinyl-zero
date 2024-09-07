@@ -35,8 +35,8 @@ export function DiscSubstatSelector(props: {disc: number}) {
         {
           let {key, ...outerProps} = attrs
 
-          const index = stats.findIndex(s => s.label === option.label)
-          const disabled = index === -1
+          const substat = stats.findIndex(s => s.label === option.label)
+          const disabled = substat === -1
 
           return (
             // TODO SX
@@ -51,27 +51,21 @@ export function DiscSubstatSelector(props: {disc: number}) {
                   {option && option.label}
                 </div>
               </Grid2>
-              <Grid2 size="auto" container onClick={(e) => {
-                if (!disabled) e.stopPropagation()
-              }}>
+              <Grid2
+                size="auto"
+                container
+                // If the row is active, don't deselect if the click happens inside the Rating section.
+                onClick={(e) => {if (!disabled) e.stopPropagation()}}>
                 <Rating
                     max={4}
                     onChange={(e, v) => {
-
-                      const drive = agent.discDrives[props.disc]
-                      const level = v === null ? 0 : v as SubstatLevel
-
-                      const newSubstats = drive.subStats.slice()
-                      newSubstats[index] = {label: newSubstats[index].label, level}
-
-                      const newDrive: DiscDrive = {
-                        ...drive,
-                        subStats: newSubstats
-                      }
-
-                      dispatch(agentActions.updateDisc({i: 0, drive: newDrive}))
+                      dispatch(agentActions.setDiscSubstatLevel({
+                        disc: props.disc,
+                        substat: substat,
+                        level: v as SubstatLevel | null
+                      }))
                     }}
-                    value={stats[index] ? stats[index].level : 0}
+                    value={stats[substat] ? stats[substat].level : 0}
                     disabled={disabled}
                 />
               </Grid2>
@@ -83,22 +77,13 @@ export function DiscSubstatSelector(props: {disc: number}) {
         value={
           agent.discDrives[props.disc].subStats
         }
-        renderTags={(value, innerProps) => {
-          return value.map((x, index) => {
-
-            return (
-              <Chip
-                {...innerProps({index})}
-                key={x.label}
-                label={x.label}
-              />
-            )
-          })
-        }}
+        renderTags={(it, ) =>
+          it.map((x, index) => <Chip {...({index})} key={x.label} label={x.label}/>
+        )
+        }
         multiple
         isOptionEqualToValue={(a, b) => a.label === b.label}
         getOptionDisabled={(option) => {
-
           if (stats.map(s => s.label).includes(option.label)) {
             return false
           }
@@ -106,11 +91,9 @@ export function DiscSubstatSelector(props: {disc: number}) {
         }}
 
         onChange={(e, v) => {
-          const drive = {...agent.discDrives[props.disc]}
-          drive.subStats = v
-          dispatch(agentActions.updateDisc({i: 0, drive}))
+          dispatch(agentActions.setDiscSubstats({disc: props.disc, substats: v}))
         }}
-
+        
         inputValue={inputValue}
         onInputChange={(e, v) => setInputValue(v)}
         autoHighlight
