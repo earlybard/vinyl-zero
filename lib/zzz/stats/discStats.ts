@@ -1,4 +1,4 @@
-import {DriveSubstat} from "@/lib/zzz/disc-drives/discDrive";
+import {DriveMainstat, DriveSubstat} from "@/lib/zzz/disc-drives/discDrive";
 
 export const ODriveSubstat = {
   critDmg:  "Crit Damage",
@@ -13,10 +13,9 @@ export const ODriveSubstat = {
   anomalyProficiency:  "Anomaly Proficiency"
 }
 
-export const SubstatOptions: DriveSubstat[] = Object.values(ODriveSubstat).map(s =>
-  {return {label: s, level: 0}}
+export const SubstatOptions: DriveSubstat[] = Object.entries(ODriveSubstat).map(([k, s]) =>
+  {return {label: s, level: 0, key: k}}
 )
-
 
 export type DriveSubstatOption = typeof ODriveSubstat[keyof typeof ODriveSubstat];
 
@@ -52,22 +51,26 @@ export const ODriveMainstat = {
   penRatio:  "Pen Ratio",
 }
 
-export type DriveMainstat = typeof ODriveMainstat[keyof typeof ODriveMainstat];
+export type DriveMainstatOption = typeof ODriveMainstat[keyof typeof ODriveMainstat];
 
-export type AgentDriveMainstatCount = Record<DriveMainstat, number>
+export const MainstatOptions: DriveMainstat[] = Object.entries(ODriveMainstat).map(([k, s]) =>
+  {return {label: s, key: k}}
+)
+
+export type AgentDriveMainstatCount = Record<DriveMainstatOption, number>
 
 export const DefaultAgentDriveMainstatCount: AgentDriveMainstatCount = {
   anomalyMastery: 0,
   anomalyProficiency: 0,
-  atkFlat: 1,
+  atkFlat: 0,
   atkPercent: 0,
   attributeDamagePercent: 0,
   critDmg: 0,
   critRate: 0,
-  defFlat: 1,
+  defFlat: 0,
   defPercent: 0,
   energyRegen: 0,
-  hpFlat: 1,
+  hpFlat: 0,
   hpPercent: 0,
   impact: 0,
   penRatio: 0

@@ -3,7 +3,7 @@ import {
 } from "@/lib/zzz/stats/discStats";
 import {Agent} from "@/lib/zzz/core/Agent";
 import {DefaultBuffValues} from "@/lib/zzz/stats/buffs";
-import {DefaultDiscs} from "@/lib/zzz/disc-drives/discDrive";
+import {AgentDiscDrives, DefaultDiscs, DefaultDiscValues} from "@/lib/zzz/disc-drives/discDrive";
 
 export const JaneDoe: Agent = {
   label: "Jane Doe",
@@ -24,26 +24,6 @@ export const JaneDoe: Agent = {
     energyRegen: 0.012
   },
 
-  mainstatCount: {
-    ...DefaultAgentDriveMainstatCount,
-    anomalyProficiency: 1,
-    penRatio: 1,
-    anomalyMastery: 1
-  },
-
-  substatCount: {
-    critDmg: 4,
-    critRate: 4,
-    anomalyProficiency: 4,
-    atkFlat: 4,
-    atkPercent: 4,
-    defFlat: 4,
-    defPercent: 4,
-    hpFlat: 4,
-    hpPercent: 4,
-    penFlat: 4
-  },
-
   buffs: {
     ...DefaultBuffValues,
     penPercent: 0.32,
@@ -51,5 +31,5 @@ export const JaneDoe: Agent = {
     attributeDamagePercent: 0.55
   },
 
-  discDrives: {...DefaultDiscs}
+  discDrives: DefaultDiscs.slice() as AgentDiscDrives
 }

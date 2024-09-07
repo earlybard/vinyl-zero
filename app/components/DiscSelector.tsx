@@ -1,10 +1,10 @@
 import {useAppDispatch, useAppSelector} from "@/lib/store/util/hooks";
 import * as React from "react";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {Autocomplete, Chip, ClickAwayListener, Grid2, Rating, TextField} from "@mui/material";
 import {SubstatOptions} from "@/lib/zzz/stats/discStats";
 import {agentActions} from "@/lib/store/agentStore";
-import {DiscDrive, SubstatLevel} from "@/lib/zzz/disc-drives/discDrive";
+import {SubstatLevel} from "@/lib/zzz/disc-drives/discDrive";
 
 export function DiscSubstatSelector(props: {disc: number}) {
 

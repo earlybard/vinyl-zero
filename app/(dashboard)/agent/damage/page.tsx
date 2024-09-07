@@ -5,14 +5,33 @@ import Typography from "@mui/material/Typography";
 import {useAppSelector} from "@/lib/store/util/hooks";
 import {MainstatMultipliers, SubstatMultipliers} from "@/lib/zzz/constants/statMultipliers";
 import {AnomalyMultipliers, AnomalyType} from "@/lib/zzz/constants/anomaly";
+import {DefaultAgentDriveMainstatCount, DefaultAgentDriveSubstatCount} from "@/lib/zzz/stats/discStats";
 
 export default function DamagePage() {
 
-  const agent = useAppSelector(s => s.agent.selectedAgent)
+  const agent = useAppSelector(s => s.agent.agents[s.agent.i])
 
   const baseStats = agent.baseStats
-  const mainstatCount = agent.mainstatCount
-  const substatCount = agent.substatCount
+
+  const mainstatCount = {...DefaultAgentDriveMainstatCount}
+  const substatCount = {...DefaultAgentDriveSubstatCount}
+
+  // TODO i hate this. the design for how we store substats and their key etc has to change.
+  for (let discDrive of agent.discDrives) {
+    if (discDrive.mainStat) {
+      mainstatCount[discDrive.mainStat.key] += 1
+    }
+
+    for (let substat of discDrive.subStats) {
+      substatCount[substat.key] += 1
+      if (substat.level) {
+        substatCount[substat.key] += substat.level
+      }
+    }
+  }
+
+  console.log(mainstatCount, substatCount)
+
   const buffs = agent.buffs
 
   // 714 is wengine attack. TODO this needs to be its own object
