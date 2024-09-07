@@ -22,133 +22,99 @@ export function DiscSubstatSelector(props: {disc: number}) {
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
       <Autocomplete
-      open={open}
-      onOpen={() => setOpen(true)}
-      onClose={(e, r) => {
-        if (r === "selectOption" || r === "removeOption") {
-          e.stopPropagation()
-        }
-        console.log(e, r)
-      }}
-      // onClose={() => setOpen(false)}
-      // disableCloseOnSelect
-      renderInput={(params) => <TextField {...params} label={`Disc ${props.disc}`} />}
-      renderOption={(attrs, option) =>
-      {
-        let {key, onClick, ...outerProps} = attrs
-        let {className, ...innerProps} = attrs
+        // Controlled open/close so that only clickaway closes.
+        open={open}
+        onOpen={() => setOpen(true)}
+        onClose={(e, r) => {
+          if (r === "selectOption" || r === "removeOption") {
+            e.stopPropagation()
+          }
+        }}
+        renderInput={(params) => <TextField {...params} label={`Disc ${props.disc}`} />}
+        renderOption={(attrs, option) =>
+        {
+          let {key, ...outerProps} = attrs
 
-        delete attrs.onClick
-        delete attrs.key
+          const index = stats.findIndex(s => s.label === option.label)
+          const disabled = index === -1
 
-        const index = stats.findIndex(s => s.label === option.label)
-        const disabled = index === -1
-
-        return (
-          // TODO SX
-          <li
-            onClick={onClick}
-          //   onClick={disabled ? onClick : (e) => {
-          //   console.log(e.target.tagName)
-          //   if (e.target.tagName === "LABEL") {
-          //     // e.stopPropagation()
-          //     // e.nativeEvent.stopPropagation()
-          //     // e.nativeEvent.stopImmediatePropagation()
-          //     onClick(e)
-          //   } else {
-          //     onClick(e)
-          //   }
-          // }}
+          return (
+            // TODO SX
+            <li
               {...outerProps}
               key={key}
               style={{paddingTop: 0, paddingBottom: 0}}
-          >
-          <Grid2 container width="100%" sx={{paddingTop: 1, paddingBottom: 1}}>
-            <Grid2 size="grow" container {...innerProps} key={key}>
-              <div>
-                {option && option.label}
-              </div>
+            >
+            <Grid2 container width="100%" sx={{paddingTop: 1, paddingBottom: 1}}>
+              <Grid2 size="grow" container>
+                <div>
+                  {option && option.label}
+                </div>
+              </Grid2>
+              <Grid2 size="auto" container onClick={(e) => {
+                if (!disabled) e.stopPropagation()
+              }}>
+                <Rating
+                    max={4}
+                    onChange={(e, v) => {
+
+                      const drive = agent.discDrives[props.disc]
+                      const level = v === null ? 0 : v as SubstatLevel
+
+                      const newSubstats = drive.subStats.slice()
+                      newSubstats[index] = {label: newSubstats[index].label, level}
+
+                      const newDrive: DiscDrive = {
+                        ...drive,
+                        subStats: newSubstats
+                      }
+
+                      dispatch(agentActions.updateDisc({i: 0, drive: newDrive}))
+                    }}
+                    value={stats[index] ? stats[index].level : 0}
+                    disabled={disabled}
+                />
+              </Grid2>
             </Grid2>
-            <Grid2 size="auto" container onClick={(e) => {
-              if (!disabled) e.stopPropagation()
-            }}>
-              <Rating
-                  max={4}
-                  // onMouseDown={(event) => {
-                  //   event.preventDefault();
-                  //   event.stopPropagation();
-                  //   console.log('mousedown')
-                  // }}
-                  // onClick={(event) => {
-                  //   console.log(event)
-                  // //   // console.log(event.target)
-                  // //   // event.preventDefault();
-                  // //   // event.stopPropagation();
-                  // //   // event.nativeEvent.stopPropagation()
-                  // //   // event.nativeEvent.stopImmediatePropagation()
-                  // }}
-                  // onClick={(e) => e.stopPropagation()}
-                  // onMouseDown={(e) => e.stopPropagation()}
-                  onChange={(e, v) => {
-
-                    console.log("change")
-                    const drive = agent.discDrives[props.disc]
-                    const level = v === null ? 0 : v as SubstatLevel
-
-                    const newSubstats = drive.subStats.slice()
-                    newSubstats[index] = {label: newSubstats[index].label, level}
-
-                    const newDrive: DiscDrive = {
-                      ...drive,
-                      subStats: newSubstats
-                    }
-
-                    dispatch(agentActions.updateDisc({i: 0, drive: newDrive}))
-                  }}
-                  value={stats[index] ? stats[index].level : 0}
-                  disabled={disabled}
-              />
-            </Grid2>
-          </Grid2>
-        </li>)
-      }}
-      // open
-      options={SubstatOptions}
-      value={
-        agent.discDrives[props.disc].subStats
-      }
-      renderTags={(value, innerProps) => {
-        return value.map((x, index) => {
-
-          return (
-            <Chip
-              {...innerProps({index})}
-              key={x.label}
-              label={x.label}
-            />
-          )
-        })
-      }}
-      multiple
-      isOptionEqualToValue={(a, b) => a.label === b.label}
-      getOptionDisabled={(option) => {
-
-        if (stats.map(s => s.label).includes(option.label)) {
-          return false
+          </li>)
+        }}
+        // open
+        options={SubstatOptions}
+        value={
+          agent.discDrives[props.disc].subStats
         }
-        return stats.length >= 4
-      }}
+        renderTags={(value, innerProps) => {
+          return value.map((x, index) => {
 
-      onChange={(e, v) => {
-        const drive = {...agent.discDrives[props.disc]}
-        drive.subStats = v
-        dispatch(agentActions.updateDisc({i: 0, drive}))
-      }}
+            return (
+              <Chip
+                {...innerProps({index})}
+                key={x.label}
+                label={x.label}
+              />
+            )
+          })
+        }}
+        multiple
+        isOptionEqualToValue={(a, b) => a.label === b.label}
+        getOptionDisabled={(option) => {
 
-      inputValue={inputValue}
-      onInputChange={(e, v) => setInputValue(v)}
-      autoHighlight
-    />
+          if (stats.map(s => s.label).includes(option.label)) {
+            return false
+          }
+          return stats.length >= 4
+        }}
+
+        onChange={(e, v) => {
+          const drive = {...agent.discDrives[props.disc]}
+          drive.subStats = v
+          dispatch(agentActions.updateDisc({i: 0, drive}))
+        }}
+
+        inputValue={inputValue}
+        onInputChange={(e, v) => setInputValue(v)}
+        autoHighlight
+      />
     </ClickAwayListener>
   )
 }
