@@ -5,6 +5,7 @@ import {agentActions} from "@/lib/store/agentStore";
 import {ODriveMainstat, ODriveSubstat} from "@/lib/zzz/stats/discStats";
 import {useState} from "react";
 import {DiscSubstatSelector} from "@/app/components/DiscSelector";
+import * as React from "react";
 
 export default function DiscsPage() {
 

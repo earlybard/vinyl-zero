@@ -16,29 +16,64 @@ export function DiscSubstatSelector(props: {disc: number}) {
   return (
     <Autocomplete
       renderInput={(params) => <TextField {...params} label={`Disc ${props.disc}`} />}
-
+      open
       renderOption={(attrs, option) =>
       {
         let {key, onClick, ...outerProps} = attrs
-        let {key2, className, ...innerProps} = attrs
+        let {className, ...innerProps} = attrs
+
+        delete attrs.onClick
+        delete attrs.key
 
         const index = stats.findIndex(s => s.label === option.label)
         const disabled = index === -1
 
         return (
           // TODO SX
-          <li {...outerProps} key={key} style={{paddingTop: 0, paddingBottom: 0}}>
+          <li
+            onClick={onClick}
+          //   onClick={disabled ? onClick : (e) => {
+          //   console.log(e.target.tagName)
+          //   if (e.target.tagName === "LABEL") {
+          //     // e.stopPropagation()
+          //     // e.nativeEvent.stopPropagation()
+          //     // e.nativeEvent.stopImmediatePropagation()
+          //     onClick(e)
+          //   } else {
+          //     onClick(e)
+          //   }
+          // }}
+              {...outerProps}
+              key={key}
+              style={{paddingTop: 0, paddingBottom: 0}}
+          >
           <Grid2 container width="100%" sx={{paddingTop: 1, paddingBottom: 1}}>
-            <Grid2 size="grow" onClick={onClick} {...innerProps} container>
+            <Grid2 size="grow" container {...innerProps} key={key}>
               <div>
                 {option && option.label}
               </div>
             </Grid2>
-            <Grid2 size="auto" container>
+            <Grid2 size="auto" container onClick={(e) => {e.stopPropagation()}}>
               <Rating
                   max={4}
+                  // onMouseDown={(event) => {
+                  //   event.preventDefault();
+                  //   event.stopPropagation();
+                  //   console.log('mousedown')
+                  // }}
+                  // onClick={(event) => {
+                  //   console.log(event)
+                  // //   // console.log(event.target)
+                  // //   // event.preventDefault();
+                  // //   // event.stopPropagation();
+                  // //   // event.nativeEvent.stopPropagation()
+                  // //   // event.nativeEvent.stopImmediatePropagation()
+                  // }}
+                  // onClick={(e) => e.stopPropagation()}
+                  // onMouseDown={(e) => e.stopPropagation()}
                   onChange={(e, v) => {
 
+                    console.log("change")
                     const drive = agent.discDrives[props.disc]
                     const level = v === null ? 0 : v as SubstatLevel
 
@@ -50,18 +85,8 @@ export function DiscSubstatSelector(props: {disc: number}) {
                       subStats: newSubstats
                     }
 
-                    console.log(drive)
-                    console.log(newDrive)
                     dispatch(agentActions.updateDisc({i: 0, drive: newDrive}))
                   }}
-                  // onChange={(e, v) => {
-                  //   const x = v as SubstatLevel ?? undefined
-                  //   const drive = {...agent.discDrives[props.disc]}
-                  //   const levels = drive.subStatLevels.slice()
-                  //   levels[index] = x
-                  //   drive.subStatLevels = levels
-                  //   dispatch(agentActions.updateDisc({i: 0, drive}))
-                  // }}
                   value={stats[index] ? stats[index].level : 0}
                   disabled={disabled}
               />
@@ -69,7 +94,7 @@ export function DiscSubstatSelector(props: {disc: number}) {
           </Grid2>
         </li>)
       }}
-      open
+      // open
       options={SubstatOptions}
       value={
         agent.discDrives[props.disc].subStats
