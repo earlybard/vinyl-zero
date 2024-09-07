@@ -4,7 +4,8 @@ import * as React from "react";
 import {DiscSubstatSelector} from "@/app/components/DiscSelector";
 import {DiscMainstatSelector} from "@/app/components/DiscMainstatSelector";
 import Typography from "@mui/material/Typography";
-import {DriveMainstat, ODriveMainstat, ODriveSubstat} from "@/lib/zzz/stats/discStats";
+import {DriveMainstat} from "@/lib/zzz/disc-drives/discDrive";
+import {Mainstats} from "@/lib/zzz/stats/discStats";
 
 
 export default function DiscsPage() {
@@ -12,12 +13,12 @@ export default function DiscsPage() {
   return (
     <Grid2 container spacing={2}>
       <Grid2 size={12}>
-        <Disc index={0} options={[ODriveMainstat.hpFlat]}/>
-        <Disc index={1} options={[ODriveMainstat.atkFlat]}/>
-        <Disc index={2} options={[ODriveMainstat.defFlat]}/>
-        <Disc index={3} options={[ODriveMainstat.atkPercent, ODriveMainstat.hpPercent, ODriveMainstat.defPercent, ODriveMainstat.critRate, ODriveMainstat.critDmg, ODriveMainstat.anomalyProficiency]}/>
-        <Disc index={4} options={[ODriveMainstat.atkPercent, ODriveMainstat.hpPercent, ODriveMainstat.defPercent, ODriveMainstat.penRatio, ODriveMainstat.attributeDamagePercent]}/>
-        <Disc index={5} options={[ODriveMainstat.atkPercent, ODriveMainstat.hpPercent, ODriveMainstat.defPercent, ODriveMainstat.anomalyMastery, ODriveMainstat.impact, ODriveMainstat.energyRegen]}/>
+        <Disc index={0} options={[Mainstats.hpFlat]}/>
+        <Disc index={1} options={[Mainstats.atkFlat]}/>
+        <Disc index={2} options={[Mainstats.defFlat]}/>
+        <Disc index={3} options={[Mainstats.atkPercent, Mainstats.hpPercent, Mainstats.defPercent, Mainstats.critRate, Mainstats.critDmg, Mainstats.anomalyProficiency]}/>
+        <Disc index={4} options={[Mainstats.atkPercent, Mainstats.hpPercent, Mainstats.defPercent, Mainstats.penRatio, Mainstats.attributeDamagePercent]}/>
+        <Disc index={5} options={[Mainstats.atkPercent, Mainstats.hpPercent, Mainstats.defPercent, Mainstats.anomalyMastery, Mainstats.impact, Mainstats.energyRegen]}/>
       </Grid2>
     </Grid2>
   )

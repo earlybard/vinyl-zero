@@ -51,13 +51,16 @@ export const ODriveMainstat = {
   penRatio:  "Pen Ratio",
 }
 
-export type DriveMainstatOption = typeof ODriveMainstat[keyof typeof ODriveMainstat];
+export type DriveMainstatKey = keyof typeof ODriveMainstat
+export type DriveMainstatLabel = typeof ODriveMainstat[DriveMainstatKey];
 
-export const MainstatOptions: DriveMainstat[] = Object.entries(ODriveMainstat).map(([k, s]) =>
-  {return {label: s, key: k}}
-)
+// @ts-ignore
+export const Mainstats: Record<DriveMainstatKey, DriveMainstat> = {}
+Object.entries(ODriveMainstat).map(([k, v]) => {
+  Mainstats[k as DriveMainstatKey] = {label: v, key: k as DriveMainstatKey}
+})
 
-export type AgentDriveMainstatCount = Record<DriveMainstatOption, number>
+export type AgentDriveMainstatCount = Record<DriveMainstatLabel, number>
 
 export const DefaultAgentDriveMainstatCount: AgentDriveMainstatCount = {
   anomalyMastery: 0,

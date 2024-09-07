@@ -1,8 +1,7 @@
-import {AgentBaseStat} from "@/lib/zzz/stats/baseStats";
 import {
-  DriveMainstatOption,
-  DriveSubstatOption, MainstatOptions,
-  ODriveMainstat,
+  DriveMainstatKey,
+  DriveMainstatLabel,
+  DriveSubstatOption, Mainstats,
 } from "@/lib/zzz/stats/discStats";
 
 export type SubstatLevel = 0 | 1 | 2 | 3 | 4
@@ -14,8 +13,8 @@ export interface DriveSubstat {
 }
 
 export interface DriveMainstat {
-  label: DriveMainstatOption
-  key: string
+  label: DriveMainstatLabel
+  key: DriveMainstatKey
 }
 
 export interface DiscDrive {
@@ -38,10 +37,10 @@ export type AgentDiscDrives = [
 ]
 
 export const DefaultDiscs: AgentDiscDrives = [
-  {...DefaultDiscValues},
-  {...DefaultDiscValues},
-  {...DefaultDiscValues},
-  {...DefaultDiscValues},
-  {...DefaultDiscValues},
-  {...DefaultDiscValues},
+  {mainStat: Mainstats.hpFlat, subStats: []},
+  {mainStat: Mainstats.atkFlat, subStats: []},
+  {mainStat: Mainstats.defFlat, subStats: []},
+  {mainStat: Mainstats.atkPercent, subStats: []},
+  {mainStat: Mainstats.atkPercent, subStats: []},
+  {mainStat: Mainstats.atkPercent, subStats: []},
 ]

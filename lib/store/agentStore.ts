@@ -2,8 +2,8 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {Agent} from "@/lib/zzz/core/Agent";
 import {JaneDoe} from "@/lib/zzz/agents/janeDoe";
 import {ZhuYuan} from "@/lib/zzz/agents/zhuYuan";
-import {DiscDrive, DriveSubstat, SubstatLevel} from "@/lib/zzz/disc-drives/discDrive";
-import {DriveMainstatOption} from "@/lib/zzz/stats/discStats";
+import {DiscDrive, DriveMainstat, DriveSubstat, SubstatLevel} from "@/lib/zzz/disc-drives/discDrive";
+import {DriveMainstatLabel} from "@/lib/zzz/stats/discStats";
 
 export interface AgentState {
     agents: Agent[]
@@ -32,9 +32,9 @@ export const agentSlice = createSlice({
         updateDisc: (state, payload: PayloadAction<{ i: number, drive: DiscDrive }>) => {
             state.agents[state.i].discDrives[payload.payload.i] = payload.payload.drive
         },
-        setDiscMainstat: (state, payload: PayloadAction<{disc: number, mainstat: DriveMainstatOption | null}>) => {
+        setDiscMainstat: (state, payload: PayloadAction<{disc: number, mainstat: DriveMainstat | null}>) => {
             const p = payload.payload
-            const disc = state.agents[state.i].discDrives[p.disc]
+            state.agents[state.i].discDrives[p.disc].mainStat = p.mainstat
         },
         setDiscSubstats: (state, payload: PayloadAction<{
             disc: number, substats: DriveSubstat[]
