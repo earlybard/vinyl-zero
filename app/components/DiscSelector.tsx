@@ -35,8 +35,11 @@ export function DiscSubstatSelector(props: {disc: number}) {
         {
           let {key, ...outerProps} = attrs
 
-          const substat = stats.findIndex(s => s.label === option.label)
-          const disabled = substat === -1
+          const substatIndex = stats.findIndex(s => s.label === option.label)
+          const substat = stats[substatIndex]
+          const disabled = substatIndex === -1
+
+          let label = option.label
 
           return (
             // TODO SX
@@ -48,7 +51,7 @@ export function DiscSubstatSelector(props: {disc: number}) {
             <Grid2 container width="100%" sx={{paddingTop: 1, paddingBottom: 1}}>
               <Grid2 size="grow" container>
                 <div>
-                  {option && option.label}
+                  {label}
                 </div>
               </Grid2>
               <Grid2
@@ -61,11 +64,11 @@ export function DiscSubstatSelector(props: {disc: number}) {
                     onChange={(e, v) => {
                       dispatch(agentActions.setDiscSubstatLevel({
                         disc: props.disc,
-                        substat: substat,
+                        substat: substatIndex,
                         level: v as SubstatLevel | null
                       }))
                     }}
-                    value={stats[substat] ? stats[substat].level : 0}
+                    value={stats[substatIndex] ? stats[substatIndex].level : 0}
                     disabled={disabled}
                 />
               </Grid2>
@@ -77,8 +80,14 @@ export function DiscSubstatSelector(props: {disc: number}) {
         value={
           agent.discDrives[props.disc].subStats
         }
-        renderTags={(it, ) =>
-          it.map((x, index) => <Chip {...({index})} key={x.label} label={x.label}/>
+        renderTags={(it, p) =>
+          it.map((x, index) => {
+            let label = x.label
+            if (x.level > 0) {
+              label += ` +${x.level}`
+            }
+            return <Chip {...p({index})} key={x.label} label={label}/>
+          }
         )
         }
         multiple
