@@ -1,7 +1,7 @@
 import {useAppDispatch, useAppSelector} from "@/lib/store/util/hooks";
 import * as React from "react";
-import {useState} from "react";
-import {Autocomplete, Chip, Grid2, Rating, TextField} from "@mui/material";
+import {useEffect, useState} from "react";
+import {Autocomplete, Chip, ClickAwayListener, Grid2, Rating, TextField} from "@mui/material";
 import {SubstatOptions} from "@/lib/zzz/stats/discStats";
 import {agentActions} from "@/lib/store/agentStore";
 import {DiscDrive, SubstatLevel} from "@/lib/zzz/disc-drives/discDrive";
@@ -13,10 +13,26 @@ export function DiscSubstatSelector(props: {disc: number}) {
   const [inputValue, setInputValue] = useState('');
   const dispatch = useAppDispatch();
 
+  const [open, setOpen] = useState(false);
+
+  const handleClickAway = () => {
+    setOpen(false);
+  };
+
   return (
-    <Autocomplete
+    <ClickAwayListener onClickAway={handleClickAway}>
+      <Autocomplete
+      open={open}
+      onOpen={() => setOpen(true)}
+      onClose={(e, r) => {
+        if (r === "selectOption" || r === "removeOption") {
+          e.stopPropagation()
+        }
+        console.log(e, r)
+      }}
+      // onClose={() => setOpen(false)}
+      // disableCloseOnSelect
       renderInput={(params) => <TextField {...params} label={`Disc ${props.disc}`} />}
-      open
       renderOption={(attrs, option) =>
       {
         let {key, onClick, ...outerProps} = attrs
@@ -53,7 +69,9 @@ export function DiscSubstatSelector(props: {disc: number}) {
                 {option && option.label}
               </div>
             </Grid2>
-            <Grid2 size="auto" container onClick={(e) => {e.stopPropagation()}}>
+            <Grid2 size="auto" container onClick={(e) => {
+              if (!disabled) e.stopPropagation()
+            }}>
               <Rating
                   max={4}
                   // onMouseDown={(event) => {
@@ -112,7 +130,6 @@ export function DiscSubstatSelector(props: {disc: number}) {
         })
       }}
       multiple
-      disableCloseOnSelect
       isOptionEqualToValue={(a, b) => a.label === b.label}
       getOptionDisabled={(option) => {
 
@@ -132,5 +149,6 @@ export function DiscSubstatSelector(props: {disc: number}) {
       onInputChange={(e, v) => setInputValue(v)}
       autoHighlight
     />
+    </ClickAwayListener>
   )
 }
