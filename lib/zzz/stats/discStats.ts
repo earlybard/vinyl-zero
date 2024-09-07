@@ -1,15 +1,3 @@
-// export type DriveSubstat =
-//   "critDmg" |
-//   "critRate" |
-//   "atkFlat" |
-//   "atkPercent" |
-//   "hpFlat" |
-//   "hpPercent" |
-//   "defFlat" |
-//   "defPercent" |
-//   "penFlat" |
-//   "anomalyProficiency"
-
 import {DriveSubstat} from "@/lib/zzz/disc-drives/discDrive";
 
 export const ODriveSubstat = {
@@ -28,6 +16,7 @@ export const ODriveSubstat = {
 export const SubstatOptions: DriveSubstat[] = Object.values(ODriveSubstat).map(s =>
   {return {label: s, level: 0}}
 )
+
 
 export type DriveSubstatOption = typeof ODriveSubstat[keyof typeof ODriveSubstat];
 
