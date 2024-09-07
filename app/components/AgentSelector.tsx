@@ -18,9 +18,10 @@ export default function AgentSelector() {
     <Autocomplete
       renderInput={(params) => <TextField {...params} label="Agent" />}
 
+      isOptionEqualToValue={(o, v) => o.label === v.label}
       options={agent.agents}
 
-      value={agent.selectedAgent}
+      value={agent.agents[agent.i]}
       onChange={(e, v) => {
         dispatch(agentActions.selectAgent(v))
       }}

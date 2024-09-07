@@ -8,7 +8,7 @@ import {DiscDrive, SubstatLevel} from "@/lib/zzz/disc-drives/discDrive";
 
 export function DiscSubstatSelector(props: {disc: number}) {
 
-  const agent = useAppSelector(s => s.agent.selectedAgent)
+  const agent = useAppSelector(s => s.agent.agents[s.agent.i])
   const stats = agent.discDrives[props.disc].subStats
   const [inputValue, setInputValue] = useState('');
   const dispatch = useAppDispatch();
@@ -30,7 +30,7 @@ export function DiscSubstatSelector(props: {disc: number}) {
             e.stopPropagation()
           }
         }}
-        renderInput={(params) => <TextField {...params} label={`Disc ${props.disc}`} />}
+        renderInput={(params) => <TextField {...params} label={`Substats`} />}
         renderOption={(attrs, option) =>
         {
           let {key, ...outerProps} = attrs

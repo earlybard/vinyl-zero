@@ -6,7 +6,7 @@ import {DiscDrive, DriveSubstat, SubstatLevel} from "@/lib/zzz/disc-drives/discD
 
 export interface AgentState {
     agents: Agent[]
-    selectedAgent: Agent
+    i: number
 }
 
 const initialState: AgentState = {
@@ -14,7 +14,7 @@ const initialState: AgentState = {
         JaneDoe,
         ZhuYuan
     ],
-    selectedAgent: JaneDoe
+    i: 0
 }
 
 export const agentSlice = createSlice({
@@ -26,27 +26,22 @@ export const agentSlice = createSlice({
          */
         selectAgent: (state, payload: PayloadAction<Agent | null>) => {
 
-            const index = state.agents.findIndex(x => x.label === payload.payload?.label)
-            const selectedAgent = state.agents[index]
-
-            if (selectedAgent) {
-                state.selectedAgent = selectedAgent
-            }
+            state.i = state.agents.findIndex(x => x.label === payload.payload?.label)
         },
         updateDisc: (state, payload: PayloadAction<{ i: number, drive: DiscDrive }>) => {
-            state.selectedAgent.discDrives[payload.payload.i] = payload.payload.drive
+            state.agents[state.i].discDrives[payload.payload.i] = payload.payload.drive
         },
         setDiscSubstats: (state, payload: PayloadAction<{
             disc: number, substats: DriveSubstat[]
         }>) => {
             const p = payload.payload
-            state.selectedAgent.discDrives[p.disc].subStats = p.substats
+            state.agents[state.i].discDrives[p.disc].subStats = p.substats
         },
         setDiscSubstatLevel: (state, payload: PayloadAction<{
             disc: number, substat: number, level: SubstatLevel | null
         }>) => {
             const p = payload.payload
-            state.selectedAgent.discDrives[p.disc].subStats[p.substat].level = p.level ?? 0
+            state.agents[state.i].discDrives[p.disc].subStats[p.substat].level = p.level ?? 0
         }
     }
 })
