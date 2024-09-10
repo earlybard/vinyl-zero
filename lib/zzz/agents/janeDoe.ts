@@ -2,8 +2,9 @@ import {
   DefaultAgentDriveMainstatCount
 } from "@/lib/zzz/stats/discStats";
 import {Agent} from "@/lib/zzz/core/Agent";
-import {DefaultBuffValues} from "@/lib/zzz/stats/buffs";
+import {DefaultBuffValues} from "@/lib/zzz/core/buffs";
 import {AgentDiscDrives, DefaultDiscs, DefaultDiscValues} from "@/lib/zzz/disc-drives/discDrive";
+import {SharpenedStinger} from "@/lib/zzz/wengine/wengines";
 
 export const JaneDoe: Agent = {
   label: "Jane Doe",
@@ -12,24 +13,34 @@ export const JaneDoe: Agent = {
   // TODO atk vs. anomaly vs. support etc
 
   baseStats: {
-    def: 607,
     hp: 7789,
     atk: 881,
+    def: 607,
+    impact: 86,
     critRate: 0.05,
     critDmg: 0.5,
+    anomalyMastery: 148,
+    anomalyProficiency: 114,
     penRatio: 0,
-    impact: 86,
-    anomalyMastery: 150,
-    anomalyProficiency: 112,
     energyRegen: 0.012
   },
 
   buffs: {
     ...DefaultBuffValues,
-    penPercent: 0.32,
+    // Seth
+    anomalyProficiency: 100,
+
+    // Jane crits
+    anomalyDamageMultiplier: 1.5,
+
+    // Jane core passive
+    anomalyBuildupRate: 0.35,
+
+    // Jane core passive
     finalAtkFlat: 440,
-    attributeDamagePercent: 0.55
   },
 
-  discDrives: DefaultDiscs.slice() as AgentDiscDrives
+  discDrives: DefaultDiscs.slice() as AgentDiscDrives,
+
+  wengine: SharpenedStinger
 }

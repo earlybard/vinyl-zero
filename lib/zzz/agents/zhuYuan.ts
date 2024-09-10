@@ -2,8 +2,9 @@ import {
   DefaultAgentDriveMainstatCount
 } from "@/lib/zzz/stats/discStats";
 import {Agent} from "@/lib/zzz/core/Agent";
-import {DefaultBuffValues} from "@/lib/zzz/stats/buffs";
+import {DefaultBuffValues} from "@/lib/zzz/core/buffs";
 import {AgentDiscDrives, DefaultDiscs} from "@/lib/zzz/disc-drives/discDrive";
+import {SharpenedStinger} from "@/lib/zzz/wengine/wengines";
 
 export const ZhuYuan: Agent = {
   label: "Zhu Yuan",
@@ -32,5 +33,7 @@ export const ZhuYuan: Agent = {
     attributeDamagePercent: 0.55
   },
 
-  discDrives: DefaultDiscs.slice() as AgentDiscDrives
+  discDrives: DefaultDiscs.slice() as AgentDiscDrives,
+
+  wengine: SharpenedStinger,
 }

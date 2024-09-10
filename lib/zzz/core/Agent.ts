@@ -1,6 +1,7 @@
-import {BuffValues} from "@/lib/zzz/stats/buffs";
+import {BuffValues} from "@/lib/zzz/core/buffs";
 import {AgentBaseStats} from "@/lib/zzz/stats/baseStats";
 import {AgentDiscDrives} from "@/lib/zzz/disc-drives/discDrive";
+import {AgentWengine} from "@/lib/zzz/core/Wengine";
 
 export type AgentName =
   "Jane Doe" |
@@ -15,4 +16,5 @@ export interface Agent {
   baseStats: AgentBaseStats
   buffs: BuffValues
   discDrives: AgentDiscDrives
+  wengine: AgentWengine
 }

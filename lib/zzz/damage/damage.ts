@@ -2,17 +2,36 @@ import {MainstatMultipliers, SubstatMultipliers} from "@/lib/zzz/constants/statM
 import {AnomalyMultipliers, AnomalyType} from "@/lib/zzz/constants/anomaly";
 import {AgentDriveMainstatCount, AgentDriveSubstatCount} from "@/lib/zzz/stats/discStats";
 import {Agent} from "@/lib/zzz/core/Agent";
+import {mergeBuffs} from "@/lib/zzz/core/buffs";
+
+export interface DamageCalcs {
+  baseAttack: number
+  basicAttack: number
+  finalAttack: number
+  penFlat: number
+  penRatio: number
+  defMultiplier: number
+  attributeDamagePercent: number
+  critRate: number
+  critDmg: number
+  critMultiplier: number
+  resMultiplier: number
+  anomaly: number
+  apBonus: number
+  attackScale: number
+  anomalyDamage: Record<AnomalyType, number>
+}
 
 export function damageCalc(
   agent: Agent,
   substatCount: AgentDriveSubstatCount,
-  mainstatCount: AgentDriveMainstatCount) {
+  mainstatCount: AgentDriveMainstatCount): DamageCalcs {
 
   const baseStats = agent.baseStats
-  const buffs = agent.buffs
+  const buffs = mergeBuffs(agent.buffs, agent.wengine.buffs)
+  const wengine = agent.wengine
 
-  // 714 is wengine attack. TODO this needs to be its own object
-  const baseAttack = baseStats.atk + 714;
+  const baseAttack = baseStats.atk + wengine.baseAttack;
 
   // TODO make mainstat and substat
   const basicAttack =
@@ -72,16 +91,13 @@ export function damageCalc(
 
   // TODO Why?????
   // This is from jstern "Damage Formula" I28
+  // TODO set all my stats and see if it lines up?
   const ANOMALY_BUFF_LEVEL = 2;
-
-  const wengineAnomaly = 0
-  // Not sure if this is a buff?
-  const anomalyProficiency = wengineAnomaly + 100
 
   const apBonus = (
     (mainstatCount.anomalyProficiency * MainstatMultipliers.anomalyProficiency) +
     (substatCount.anomalyProficiency * SubstatMultipliers.anomalyProficiency) +
-    anomalyProficiency +
+    buffs.anomalyProficiency +
     baseStats.anomalyProficiency
   ) / 100
 
@@ -96,7 +112,8 @@ export function damageCalc(
     dmgTaken *
     apBonus *
     ANOMALY_BUFF_LEVEL *
-    finalAttack
+    finalAttack *
+    buffs.anomalyDamageMultiplier
 
   // TODO JD does anomaly crits. This needs to be incorporated in buffs.
   const anomalyDamage: Record<AnomalyType, number> = {
