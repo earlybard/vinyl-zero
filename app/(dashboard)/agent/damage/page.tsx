@@ -12,26 +12,7 @@ export default function DamagePage() {
 
   const agent = useAppSelector(s => s.agent.agents[s.agent.i])
 
-  const baseStats = agent.baseStats
-
-  const mainstatCount = {...DefaultAgentDriveMainstatCount}
-  const substatCount = {...DefaultAgentDriveSubstatCount}
-
-  // TODO i hate this. the design for how we store substats and their key etc has to change.
-  for (let discDrive of agent.discDrives) {
-    if (discDrive.mainStat) {
-      mainstatCount[discDrive.mainStat.key] += 1
-    }
-
-    for (let substat of discDrive.subStats) {
-      substatCount[substat.key] += 1
-      if (substat.level) {
-        substatCount[substat.key] += substat.level
-      }
-    }
-  }
-
-  const damage = damageCalc(agent, substatCount, mainstatCount)
+  const damage = damageCalc(agent)
 
   return (
     <>

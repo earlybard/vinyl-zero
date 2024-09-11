@@ -1,8 +1,13 @@
 import {MainstatMultipliers, SubstatMultipliers} from "@/lib/zzz/constants/statMultipliers";
 import {AnomalyMultipliers, AnomalyType} from "@/lib/zzz/constants/anomaly";
-import {AgentDriveMainstatCount, AgentDriveSubstatCount} from "@/lib/zzz/stats/discStats";
+import {
+  AgentDriveMainstatCount,
+  AgentDriveSubstatCount,
+  DefaultAgentDriveMainstatCount, DefaultAgentDriveSubstatCount
+} from "@/lib/zzz/stats/discStats";
 import {Agent} from "@/lib/zzz/core/Agent";
-import {mergeBuffs} from "@/lib/zzz/core/buffs";
+import {DefaultBuffValues, mergeBuffs} from "@/lib/zzz/core/buffs";
+import {Wengine} from "@/lib/zzz/core/Wengine";
 
 export interface DamageCalcs {
   baseAttack: number
@@ -22,14 +27,34 @@ export interface DamageCalcs {
   anomalyDamage: Record<AnomalyType, number>
 }
 
-export function damageCalc(
-  agent: Agent,
-  substatCount: AgentDriveSubstatCount,
-  mainstatCount: AgentDriveMainstatCount): DamageCalcs {
+export function damageCalc(agent: Agent): DamageCalcs {
 
   const baseStats = agent.baseStats
-  const buffs = mergeBuffs(agent.buffs, agent.wengine.buffs)
-  const wengine = agent.wengine
+
+  const mainstatCount = {...DefaultAgentDriveMainstatCount}
+  const substatCount = {...DefaultAgentDriveSubstatCount}
+
+  // TODO i hate this. the design for how we store substats and their key etc has to change.
+  for (let discDrive of agent.discDrives) {
+    if (discDrive.mainStat) {
+      mainstatCount[discDrive.mainStat.key] += 1
+    }
+
+    for (let substat of discDrive.subStats) {
+      substatCount[substat.key] += 1
+      if (substat.level) {
+        substatCount[substat.key] += substat.level
+      }
+    }
+  }
+
+  const wengine: Wengine = agent.wengine ?? {
+    baseAttack: 0,
+    buffs: {...DefaultBuffValues},
+    label: "Empty"
+  }
+
+  const buffs = mergeBuffs(agent.buffs, wengine.buffs)
 
   const baseAttack = baseStats.atk + wengine.baseAttack;
 

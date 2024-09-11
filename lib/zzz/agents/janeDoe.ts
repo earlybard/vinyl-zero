@@ -30,6 +30,9 @@ export const JaneDoe: Agent = {
     // Seth
     anomalyProficiency: 100,
 
+    // Rina
+    // penPercent: 0.3,
+
     // Jane crits
     anomalyDamageMultiplier: 1.5,
 

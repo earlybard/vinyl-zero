@@ -2,7 +2,7 @@ export type Buff =
   "anomalyProficiency" |
   "anomalyBuildupRate" |
 
-// Anomaly damage % actual formula:
+// Anomaly damage % actual formula for Jane:
 //=1+(0.4+Min(0.6,<final AP>*0.16%))*0.5
   "anomalyDamageMultiplier" |
 

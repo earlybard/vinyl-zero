@@ -4,6 +4,7 @@ import {JaneDoe} from "@/lib/zzz/agents/janeDoe";
 import {ZhuYuan} from "@/lib/zzz/agents/zhuYuan";
 import {DiscDrive, DriveMainstat, DriveSubstat, SubstatLevel} from "@/lib/zzz/disc-drives/discDrive";
 import {DriveMainstatLabel} from "@/lib/zzz/stats/discStats";
+import {Wengine} from "@/lib/zzz/core/Wengine";
 
 export interface AgentState {
     agents: Agent[]
@@ -29,8 +30,8 @@ export const agentSlice = createSlice({
 
             state.i = state.agents.findIndex(x => x.label === payload.payload?.label)
         },
-        updateDisc: (state, payload: PayloadAction<{ i: number, drive: DiscDrive }>) => {
-            state.agents[state.i].discDrives[payload.payload.i] = payload.payload.drive
+        setWengine: (state, payload: PayloadAction<{wengine: Wengine | null}>) => {
+            state.agents[state.i].wengine = payload.payload.wengine
         },
         setDiscMainstat: (state, payload: PayloadAction<{disc: number, mainstat: DriveMainstat | null}>) => {
             const p = payload.payload
