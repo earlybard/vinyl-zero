@@ -2,7 +2,7 @@ import {
   DefaultAgentDriveMainstatCount
 } from "@/lib/zzz/stats/discStats";
 import {Agent} from "@/lib/zzz/core/Agent";
-import {BuffLabels, DefaultBuffValues} from "@/lib/zzz/buffs/buffs";
+import {BuffLabels, DefaultBuffCounts} from "@/lib/zzz/buffs/buffs";
 import {AgentDiscDrives, DefaultDiscs, DefaultDiscValues} from "@/lib/zzz/disc-drives/discDrive";
 import {SharpenedStinger} from "@/lib/zzz/wengine/wengines";
 
@@ -26,7 +26,7 @@ export const JaneDoe: Agent = {
   },
 
   buffs: {
-    ...DefaultBuffValues,
+    ...DefaultBuffCounts,
     // Seth
     anomalyProficiency: 100,
 

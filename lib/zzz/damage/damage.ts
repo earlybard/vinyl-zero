@@ -6,7 +6,7 @@ import {
   DefaultAgentDriveMainstatCount, DefaultAgentDriveSubstatCount
 } from "@/lib/zzz/stats/discStats";
 import {Agent} from "@/lib/zzz/core/Agent";
-import {DefaultBuffValues, mergeBuffs} from "@/lib/zzz/buffs/buffs";
+import {BuffCounts, DefaultBuffCounts, mergeBuffs} from "@/lib/zzz/buffs/buffs";
 import {Wengine} from "@/lib/zzz/core/Wengine";
 import {EnemyState} from "@/lib/store/enemyStore";
 
@@ -51,11 +51,17 @@ export function damageCalc(agent: Agent, enemy: EnemyState): DamageCalcs {
 
   const wengine: Wengine = agent.wengine ?? {
     baseAttack: 0,
-    buffs: {...DefaultBuffValues},
+    buffs: {...DefaultBuffCounts},
     label: "Empty"
   }
 
-  const buffs = mergeBuffs(agent.buffs, wengine.buffs)
+  const agentBuffs: BuffCounts = {...DefaultBuffCounts}
+
+  for (let buff of agent.buffs2) {
+    agentBuffs[buff.key] = buff.value
+  }
+
+  const buffs = mergeBuffs(agentBuffs, wengine.buffs)
 
   const baseAttack = baseStats.atk + wengine.baseAttack;
 
@@ -139,7 +145,7 @@ export function damageCalc(agent: Agent, enemy: EnemyState): DamageCalcs {
     apBonus *
     ANOMALY_BUFF_LEVEL *
     finalAttack *
-    buffs.anomalyDamageMultiplier
+    (1 + buffs.anomalyDamageMultiplier)
 
   // TODO JD does anomaly crits. This needs to be incorporated in buffs.
   const anomalyDamage: Record<AnomalyType, number> = {

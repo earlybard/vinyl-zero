@@ -2,7 +2,7 @@ import {
   DefaultAgentDriveMainstatCount
 } from "@/lib/zzz/stats/discStats";
 import {Agent} from "@/lib/zzz/core/Agent";
-import {DefaultBuffValues} from "@/lib/zzz/buffs/buffs";
+import {DefaultBuffCounts} from "@/lib/zzz/buffs/buffs";
 import {AgentDiscDrives, DefaultDiscs} from "@/lib/zzz/disc-drives/discDrive";
 import {SharpenedStinger} from "@/lib/zzz/wengine/wengines";
 
@@ -27,7 +27,7 @@ export const ZhuYuan: Agent = {
   },
 
   buffs: {
-    ...DefaultBuffValues,
+    ...DefaultBuffCounts,
     penPercent: 0.32,
     finalAtkFlat: 440,
     attributeDamagePercent: 0.55

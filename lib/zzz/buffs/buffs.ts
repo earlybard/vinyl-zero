@@ -71,7 +71,7 @@ export const BuffOptions: BuffValue[] = Object.entries(BuffLabels).map(([k, v], 
   }
 })
 
-export const DefaultBuffValues: BuffCounts = {
+export const DefaultBuffCounts: BuffCounts = {
   anomalyProficiency: 0,
   anomalyBuildupRate: 0,
   anomalyDamageMultiplier: 0,
