@@ -7,6 +7,7 @@ import PercentIcon from '@mui/icons-material/Percent';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import AlbumIcon from '@mui/icons-material/Album';
 import PersonIcon from '@mui/icons-material/Person';
+import GpsNotFixedIcon from '@mui/icons-material/GpsNotFixed';
 import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';
 import type { Navigation } from '@toolpad/core';
 import { SessionProvider, signIn, signOut } from 'next-auth/react';
@@ -56,6 +57,11 @@ const NAVIGATION: Navigation = [
         segment: 'wengine',
         title: 'W-Engine',
         icon: <DonutSmallIcon />,
+      },
+      {
+        segment: 'enemy',
+        title: 'Enemy',
+        icon: <GpsNotFixedIcon />,
       },
     ]
   }

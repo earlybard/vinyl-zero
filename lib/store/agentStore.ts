@@ -5,6 +5,7 @@ import {ZhuYuan} from "@/lib/zzz/agents/zhuYuan";
 import {DiscDrive, DriveMainstat, DriveSubstat, SubstatLevel} from "@/lib/zzz/disc-drives/discDrive";
 import {DriveMainstatLabel} from "@/lib/zzz/stats/discStats";
 import {Wengine} from "@/lib/zzz/core/Wengine";
+import {BuffValue} from "@/lib/zzz/buffs/buffs";
 
 export interface AgentState {
     agents: Agent[]
@@ -26,6 +27,11 @@ export const agentSlice = createSlice({
         /**
          * Change the currently selected Agent.
          */
+        updateBuff: (state, payload: PayloadAction<BuffValue>) => {
+            const buffs = state.agents[state.i].buffs2
+            const buff = buffs.findIndex(x => x.id === payload.payload.id)
+            buffs[buff] = payload.payload
+        },
         selectAgent: (state, payload: PayloadAction<Agent | null>) => {
 
             state.i = state.agents.findIndex(x => x.label === payload.payload?.label)

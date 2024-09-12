@@ -2,7 +2,7 @@ import {
   DefaultAgentDriveMainstatCount
 } from "@/lib/zzz/stats/discStats";
 import {Agent} from "@/lib/zzz/core/Agent";
-import {DefaultBuffValues} from "@/lib/zzz/core/buffs";
+import {DefaultBuffValues} from "@/lib/zzz/buffs/buffs";
 import {AgentDiscDrives, DefaultDiscs} from "@/lib/zzz/disc-drives/discDrive";
 import {SharpenedStinger} from "@/lib/zzz/wengine/wengines";
 

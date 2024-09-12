@@ -10,8 +10,9 @@ import {damageCalc} from "@/lib/zzz/damage/damage";
 export default function Layout(props: { children: React.ReactNode }) {
 
   const agent = useAppSelector(s => s.agent.agents[s.agent.i])
+  const enemy = useAppSelector(s => s.enemy)
 
-  const damage = damageCalc(agent)
+  const damage = damageCalc(agent, enemy)
 
   return (
     <DashboardLayout>

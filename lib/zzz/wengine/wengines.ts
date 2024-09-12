@@ -1,5 +1,5 @@
 import {Wengine} from "@/lib/zzz/core/Wengine";
-import {DefaultBuffValues} from "@/lib/zzz/core/buffs";
+import {DefaultBuffValues} from "@/lib/zzz/buffs/buffs";
 
 export const RainforestGourmet: Wengine = {
   label: "Rainforest Gourmet",

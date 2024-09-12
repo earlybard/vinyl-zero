@@ -11,8 +11,9 @@ import {damageCalc} from "@/lib/zzz/damage/damage";
 export default function DamagePage() {
 
   const agent = useAppSelector(s => s.agent.agents[s.agent.i])
+  const enemy = useAppSelector(s => s.enemy)
 
-  const damage = damageCalc(agent)
+  const damage = damageCalc(agent, enemy)
 
   return (
     <>

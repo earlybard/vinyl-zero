@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import {agentReducer} from "@/lib/store/agentStore";
+import {enemyReducer} from "@/lib/store/enemyStore";
 
 export const makeStore = () => {
     return configureStore({
         reducer: {
-            agent: agentReducer
+            agent: agentReducer,
+            enemy: enemyReducer
         },
     })
 }

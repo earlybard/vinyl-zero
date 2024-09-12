@@ -6,8 +6,9 @@ import {
   DefaultAgentDriveMainstatCount, DefaultAgentDriveSubstatCount
 } from "@/lib/zzz/stats/discStats";
 import {Agent} from "@/lib/zzz/core/Agent";
-import {DefaultBuffValues, mergeBuffs} from "@/lib/zzz/core/buffs";
+import {DefaultBuffValues, mergeBuffs} from "@/lib/zzz/buffs/buffs";
 import {Wengine} from "@/lib/zzz/core/Wengine";
+import {EnemyState} from "@/lib/store/enemyStore";
 
 export interface DamageCalcs {
   baseAttack: number
@@ -27,7 +28,7 @@ export interface DamageCalcs {
   anomalyDamage: Record<AnomalyType, number>
 }
 
-export function damageCalc(agent: Agent): DamageCalcs {
+export function damageCalc(agent: Agent, enemy: EnemyState): DamageCalcs {
 
   const baseStats = agent.baseStats
 
@@ -80,7 +81,7 @@ export function damageCalc(agent: Agent): DamageCalcs {
   const penFlat = (substatCount.penFlat * SubstatMultipliers.penFlat) + buffs.penFlat
   const penRatio = (mainstatCount.penRatio * MainstatMultipliers.penRatio) + buffs.penPercent
 
-  const TARGET_BASE_DEF = 921
+  const TARGET_BASE_DEF = enemy.def
   const targetDef = TARGET_BASE_DEF - (TARGET_BASE_DEF * buffs.defShred)
   const effectiveDef = targetDef * (1 - penRatio) - penFlat
   const DEF_LEVEL_COEFFICIENT = 794

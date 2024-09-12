@@ -1,4 +1,4 @@
-import {BuffValues} from "@/lib/zzz/core/buffs";
+import {BuffCounts, BuffValue} from "@/lib/zzz/buffs/buffs";
 import {AgentBaseStats} from "@/lib/zzz/stats/baseStats";
 import {AgentDiscDrives} from "@/lib/zzz/disc-drives/discDrive";
 import {Wengine} from "@/lib/zzz/core/Wengine";
@@ -14,7 +14,8 @@ interface Attacks {
 export interface Agent {
   label: AgentName
   baseStats: AgentBaseStats
-  buffs: BuffValues
+  buffs: BuffCounts
+  buffs2: BuffValue[]
   discDrives: AgentDiscDrives
   wengine: Wengine | null
 }
