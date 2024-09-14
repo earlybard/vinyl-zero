@@ -4,7 +4,6 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import DonutSmallIcon from '@mui/icons-material/DonutSmall';
 import PercentIcon from '@mui/icons-material/Percent';
-import RefreshIcon from '@mui/icons-material/Refresh';
 import AlbumIcon from '@mui/icons-material/Album';
 import PersonIcon from '@mui/icons-material/Person';
 import GpsNotFixedIcon from '@mui/icons-material/GpsNotFixed';
@@ -43,11 +42,11 @@ const NAVIGATION: Navigation = [
         title: 'Disc Drives',
         icon: <AlbumIcon />,
       },
-      {
-        segment: 'rotation',
-        title: 'Rotation',
-        icon: <RefreshIcon />,
-      },
+      // {
+      //   segment: 'rotation',
+      //   title: 'Rotation',
+      //   icon: <RefreshIcon />,
+      // },
       {
         segment: 'buffs',
         title: 'Buffs',

@@ -25,24 +25,6 @@ export const JaneDoe: Agent = {
     energyRegen: 0.012
   },
 
-  buffs: {
-    ...DefaultBuffCounts,
-    // Seth
-    anomalyProficiency: 100,
-
-    // Rina
-    // penPercent: 0.3,
-
-    // Jane crits
-    anomalyDamageMultiplier: 1.5,
-
-    // Jane core passive
-    anomalyBuildupRate: 0.35,
-
-    // Jane core passive
-    finalAtkFlat: 440,
-  },
-
   // inherent buffs - non editable
   agentBuffs: [
     {

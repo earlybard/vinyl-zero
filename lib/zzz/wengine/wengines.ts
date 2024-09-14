@@ -1,14 +1,9 @@
 import {Wengine} from "@/lib/zzz/core/Wengine";
-import {BuffLabels, DefaultBuffCounts} from "@/lib/zzz/buffs/buffs";
+import {BuffLabels} from "@/lib/zzz/buffs/buffs";
 
 export const RainforestGourmet: Wengine = {
   label: "Rainforest Gourmet",
   baseAttack: 595,
-  buffs: {
-    ...DefaultBuffCounts,
-    anomalyProficiency: 75,
-    finalAtkPercent: 0.24
-  },
   buffs2: [
     {
       id: 0,
@@ -30,12 +25,6 @@ export const RainforestGourmet: Wengine = {
 export const SharpenedStinger: Wengine = {
   label: "Sharpened Stinger",
   baseAttack: 714,
-  buffs: {
-    ...DefaultBuffCounts,
-    anomalyProficiency: 90,
-    attributeDamagePercent: 0.36,
-    anomalyBuildupRate: 0.24
-  },
   buffs2: [
     {
       id: 0,
@@ -64,12 +53,6 @@ export const SharpenedStinger: Wengine = {
 export const FusionCompiler: Wengine = {
   label: "Fusion Compiler",
   baseAttack: 684,
-  buffs: {
-    ...DefaultBuffCounts,
-    penPercent: 0.24,
-    basicAtkPercent: 0.12,
-    anomalyProficiency: 50
-  },
   buffs2: [
     {
       id: 0,

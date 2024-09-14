@@ -14,7 +14,6 @@ interface Attacks {
 export interface Agent {
   label: AgentName
   baseStats: AgentBaseStats
-  buffs: BuffCounts
   agentBuffs: BuffValue[]
   customBuffs: BuffValue[]
   discDrives: AgentDiscDrives

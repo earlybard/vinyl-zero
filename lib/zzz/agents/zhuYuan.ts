@@ -26,12 +26,8 @@ export const ZhuYuan: Agent = {
     energyRegen: 0.012
   },
 
-  buffs: {
-    ...DefaultBuffCounts,
-    penPercent: 0.32,
-    finalAtkFlat: 440,
-    attributeDamagePercent: 0.55
-  },
+  agentBuffs: [],
+  customBuffs: [],
 
   discDrives: DefaultDiscs.slice() as AgentDiscDrives,
 

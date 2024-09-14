@@ -1,4 +1,5 @@
-import {DriveMainstat, ODriveSubstat} from "@/lib/zzz/stats/discStats";
+import {ODriveSubstat} from "@/lib/zzz/stats/discStats";
+import {ODriveMainstat} from "@/lib/zzz/stats/discStats";
 
 export const SubstatMultipliers: Record<keyof typeof ODriveSubstat, number> = {
   anomalyProficiency: 9,
@@ -13,7 +14,7 @@ export const SubstatMultipliers: Record<keyof typeof ODriveSubstat, number> = {
   penFlat: 9
 }
 
-export const MainstatMultipliers: Record<DriveMainstat, number> = {
+export const MainstatMultipliers: Record<keyof typeof ODriveMainstat, number> = {
   anomalyMastery: 0.3,
   anomalyProficiency: 92,
   atkFlat: 316,

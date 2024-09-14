@@ -1,8 +1,6 @@
 import {MainstatMultipliers, SubstatMultipliers} from "@/lib/zzz/constants/statMultipliers";
 import {AnomalyMultipliers, AnomalyType} from "@/lib/zzz/constants/anomaly";
 import {
-  AgentDriveMainstatCount,
-  AgentDriveSubstatCount,
   DefaultAgentDriveMainstatCount, DefaultAgentDriveSubstatCount
 } from "@/lib/zzz/stats/discStats";
 import {Agent} from "@/lib/zzz/core/Agent";
@@ -51,7 +49,6 @@ export function damageCalc(agent: Agent, enemy: EnemyState): DamageCalcs {
 
   const wengine: Wengine = agent.wengine ?? {
     baseAttack: 0,
-    buffs: {...DefaultBuffCounts},
     buffs2: [],
     label: "Empty"
   }
