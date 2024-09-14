@@ -1,0 +1,5 @@
+services:
+  frontend:
+    image: vinyl-zero
+    build: .
+    network_mode: host
