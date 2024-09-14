@@ -26,12 +26,12 @@ const NAVIGATION: Navigation = [
     title: 'Dashboard',
     icon: <DashboardIcon />,
   },
-  {
-    segment: 'agent',
-    title: "Agent",
-    icon: <PersonIcon />,
-
-    children: [
+  // {
+  //   segment: 'agent',
+  //   title: "Agent",
+  //   icon: <PersonIcon />,
+  //
+  //   children: [
       {
         segment: 'damage',
         title: 'Damage',
@@ -67,8 +67,8 @@ const NAVIGATION: Navigation = [
         title: 'Enemy',
         icon: <GpsNotFixedIcon />,
       },
-    ]
-  }
+    // ]
+  // }
 ];
 
 const BRANDING = {
