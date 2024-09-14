@@ -42,62 +42,56 @@ export default function StatsPage() {
 
   return (
     <>
-      <Typography variant="h6">Substat Weights</Typography>
-      <Typography>% Increase from a single extra substat of type:</Typography>
+      <Grid2 container>
+        <Grid2 size={3}><Typography variant="h6">Substat Weights</Typography></Grid2>
+        <Grid2 size={9}><Typography>% Increase from a single extra substat of type:</Typography></Grid2>
+      </Grid2>
       <Grid2 container spacing={2} sx={{ pt: 2 }}>
         {
-          Object.entries(substatWeights).map(([k, v]) => {
-
-            if ([ODriveSubstat.hpFlat, ODriveSubstat.hpPercent, ODriveSubstat.defFlat, ODriveSubstat.defPercent].includes(k)) {
-              return (<></>)
-            }
-
-            let assaultGain = (v.anomalyDamage.assault / damage.anomalyDamage.assault) - 1
-            let atkGain = (v.attackScale / damage.attackScale) - 1
-
-            assaultGain = Math.round(assaultGain * 10000) / 100
-            atkGain = Math.round(atkGain * 10000) / 100
-
-            return (<>
-              <Grid2 container size={12}>
-                <Grid2 size={3}>
-                  <Typography>{k}</Typography>
-                </Grid2>
-                <TextField size="small" disabled label="ATK Scale Gain" value={atkGain + "%"}/>
-                <TextField size="small" disabled label="Assault Gain" value={assaultGain + "%"}/>
-              </Grid2>
-            </>)
-          })
+          Object.entries(substatWeights).map(([k, v]) =>
+            <StatWeights key={k} damage={damage} k={k} newDamage={v}/>
+          )
         }
         </Grid2>
-        <Typography variant="h6">Mainstat Weights</Typography>
-        <Typography>% Increase from a single extra mainstat of type:</Typography>
+        <Divider sx={{my: 2}}/>
+        <Grid2 container>
+          <Grid2 size={3}><Typography variant="h6">Mainstat Weights</Typography></Grid2>
+          <Grid2 size={9}><Typography>% Increase from a single extra mainstat of type:</Typography></Grid2>
+        </Grid2>
         <Grid2 container spacing={2} sx={{ pt: 2 }}>
         {
-          Object.entries(mainstatWeights).map(([k, v]) => {
-
-            if ([ODriveMainstat.hpFlat, ODriveMainstat.hpPercent, ODriveMainstat.defFlat, ODriveMainstat.defPercent].includes(k)) {
-              return (<></>)
-            }
-
-            let assaultGain = (v.anomalyDamage.assault / damage.anomalyDamage.assault) - 1
-            let atkGain = (v.attackScale / damage.attackScale) - 1
-
-            assaultGain = Math.round(assaultGain * 10000) / 100
-            atkGain = Math.round(atkGain * 10000) / 100
-
-            return (<>
-              <Grid2 container size={12}>
-                <Grid2 size={3}>
-                  <Typography>{k}</Typography>
-                </Grid2>
-                <TextField size="small" disabled label="ATK Scale Gain" value={atkGain + "%"}/>
-                <TextField size="small" disabled label="Assault Gain" value={assaultGain + "%"}/>
-              </Grid2>
-            </>)
-          })
+          Object.entries(mainstatWeights).map(([k, v]) =>
+            <StatWeights key={k} damage={damage} k={k} newDamage={v}/>
+          )
         }
       </Grid2>
     </>
   )
+}
+
+function StatWeights(props: {
+  damage: DamageCalcs,
+  k: string,
+  newDamage: DamageCalcs
+}) {
+
+  if ([ODriveMainstat.hpFlat, ODriveMainstat.hpPercent, ODriveMainstat.defFlat, ODriveMainstat.defPercent].includes(props.k)) {
+    return (<></>)
+  }
+
+  let assaultGain = (props.newDamage.anomalyDamage.assault / props.damage.anomalyDamage.assault) - 1
+  let atkGain = (props.newDamage.attackScale / props.damage.attackScale) - 1
+
+  assaultGain = Math.round(assaultGain * 10000) / 100
+  atkGain = Math.round(atkGain * 10000) / 100
+
+  return (<>
+    <Grid2 container size={12}>
+      <Grid2 size={3}>
+        <Typography>{props.k}</Typography>
+      </Grid2>
+      <TextField size="small" disabled label="ATK Scale Gain" value={atkGain + "%"}/>
+      <TextField size="small" disabled label="Assault Gain" value={assaultGain + "%"}/>
+    </Grid2>
+  </>)
 }
