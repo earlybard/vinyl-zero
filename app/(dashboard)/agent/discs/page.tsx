@@ -27,14 +27,16 @@ export default function DiscsPage() {
 function Disc(props: {index: number, options: DriveMainstat[]}) {
   return (
     <>
-      <Typography variant="h5" sx={{marginBottom: 2}}>
-        Disc {props.index + 1}
-      </Typography>
       <Grid2 container>
+        <Grid2 size={1} container alignContent="center">
+          <Typography sx={{marginBottom: 2}}>
+            Disc {props.index + 1}
+          </Typography>
+        </Grid2>
         <Grid2 size={3}>
           <DiscMainstatSelector disc={props.index} options={props.options}/>
         </Grid2>
-        <Grid2 size={9}>
+        <Grid2 size={8}>
           <DiscSubstatSelector disc={props.index}/>
         </Grid2>
       </Grid2>

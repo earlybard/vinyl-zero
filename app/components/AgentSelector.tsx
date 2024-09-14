@@ -17,7 +17,7 @@ export default function AgentSelector() {
   return (
     <Autocomplete
       renderInput={(params) => <TextField {...params} label="Agent" />}
-
+      size="small"
       isOptionEqualToValue={(o, v) => o.label === v.label}
       options={agent.agents}
 

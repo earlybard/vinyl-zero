@@ -52,16 +52,29 @@ export function damageCalc(agent: Agent, enemy: EnemyState): DamageCalcs {
   const wengine: Wengine = agent.wengine ?? {
     baseAttack: 0,
     buffs: {...DefaultBuffCounts},
+    buffs2: [],
     label: "Empty"
   }
 
   const agentBuffs: BuffCounts = {...DefaultBuffCounts}
 
-  for (let buff of agent.buffs2) {
+  for (let buff of agent.agentBuffs) {
     agentBuffs[buff.key] = buff.value
   }
 
-  const buffs = mergeBuffs(agentBuffs, wengine.buffs)
+  const customBuffs: BuffCounts = {...DefaultBuffCounts}
+
+  for (let buff of agent.customBuffs) {
+    customBuffs[buff.key] = buff.value
+  }
+
+  const wengineBuffs: BuffCounts = {...DefaultBuffCounts}
+
+  for (let buff of wengine.buffs2) {
+    wengineBuffs[buff.key] = buff.value
+  }
+
+  let buffs = mergeBuffs(wengineBuffs, mergeBuffs(agentBuffs, customBuffs))
 
   const baseAttack = baseStats.atk + wengine.baseAttack;
 

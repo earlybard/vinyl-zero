@@ -18,7 +18,7 @@ export function WengineSelector() {
   return (
     <Autocomplete
       renderInput={(params) => <TextField {...params} label="W Engine" />}
-
+      size="small"
       isOptionEqualToValue={(o, v) => o.label === v.label}
       options={wengines}
 

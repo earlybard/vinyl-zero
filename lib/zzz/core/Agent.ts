@@ -15,7 +15,8 @@ export interface Agent {
   label: AgentName
   baseStats: AgentBaseStats
   buffs: BuffCounts
-  buffs2: BuffValue[]
+  agentBuffs: BuffValue[]
+  customBuffs: BuffValue[]
   discDrives: AgentDiscDrives
   wengine: Wengine | null
 }

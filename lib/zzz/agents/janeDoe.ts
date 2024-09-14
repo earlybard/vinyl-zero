@@ -44,14 +44,7 @@ export const JaneDoe: Agent = {
   },
 
   // inherent buffs - non editable
-  buffs2: [
-    {
-      id: 0,
-      key: "anomalyProficiency",
-      label: BuffLabels.anomalyProficiency,
-      value: 100,
-      description: "Seth Buff"
-    },
+  agentBuffs: [
     {
       id: 1,
       key: "anomalyDamageMultiplier",
@@ -73,6 +66,37 @@ export const JaneDoe: Agent = {
       value: 440,
       description: "Core Passive"
     }
+  ],
+
+  customBuffs: [
+    {
+      id: 0,
+      key: "anomalyProficiency",
+      label: BuffLabels.anomalyProficiency,
+      value: 100,
+      description: "Seth Buff"
+    },
+    {
+      id: 1,
+      key: "anomalyProficiency",
+      label: BuffLabels.anomalyProficiency,
+      value: 30,
+      description: "Freedom Blues 2pc"
+    },
+    {
+      id: 2,
+      key: "attributeDamagePercent",
+      label: BuffLabels.attributeDamagePercent,
+      value: 0.1,
+      description: "Fanged Metal 2pc"
+    },
+    {
+      id: 3,
+      key: "dmgTaken",
+      label: BuffLabels.dmgTaken,
+      value: 0.35,
+      description: "Fanged Metal 4pc"
+    },
   ],
 
   // extra buffs -editable - empty array

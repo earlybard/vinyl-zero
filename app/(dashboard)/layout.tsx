@@ -3,9 +3,10 @@ import * as React from 'react';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { PageContainer } from '@toolpad/core/PageContainer';
 import AgentSelector from "@/app/components/AgentSelector";
-import {Divider, Grid2, TextField} from "@mui/material";
+import {Box, Divider, Grid2, TextField} from "@mui/material";
 import {useAppSelector} from "@/lib/store/util/hooks";
 import {damageCalc} from "@/lib/zzz/damage/damage";
+import {WengineSelector} from "@/app/components/WengineSelector";
 
 export default function Layout(props: { children: React.ReactNode }) {
 
@@ -17,13 +18,20 @@ export default function Layout(props: { children: React.ReactNode }) {
   return (
     <DashboardLayout>
       <PageContainer>
-        <AgentSelector/>
-        <Divider sx={{ pt: 2 }}/>
-        <Grid2 container spacing={2} sx={{ py: 2 }}>
-          <TextField disabled label="Attack Scale" value={Math.round(damage.attackScale)}/>
-          <TextField disabled label="Assault Damage" value={Math.round(damage.anomalyDamage.assault)}/>
+        <Grid2 container spacing={2}>
+          <Grid2 size={6}>
+            <AgentSelector/>
+          </Grid2>
+          <Grid2 size={6}>
+            <WengineSelector/>
+          </Grid2>
         </Grid2>
         <Divider sx={{ pt: 2 }}/>
+        <Grid2 container spacing={2} sx={{ pt: 2 }}>
+          <TextField size="small" disabled label="Attack Scale" value={Math.round(damage.attackScale)}/>
+          <TextField size="small" disabled label="Assault Damage" value={Math.round(damage.anomalyDamage.assault)}/>
+        </Grid2>
+        <Divider sx={{ my: 2 }}/>
         {props.children}
       </PageContainer>
     </DashboardLayout>

@@ -5,7 +5,7 @@ import {ZhuYuan} from "@/lib/zzz/agents/zhuYuan";
 import {DiscDrive, DriveMainstat, DriveSubstat, SubstatLevel} from "@/lib/zzz/disc-drives/discDrive";
 import {DriveMainstatLabel} from "@/lib/zzz/stats/discStats";
 import {Wengine} from "@/lib/zzz/core/Wengine";
-import {BuffValue} from "@/lib/zzz/buffs/buffs";
+import {Buff, BuffLabels, BuffValue} from "@/lib/zzz/buffs/buffs";
 
 export interface AgentState {
     agents: Agent[]
@@ -27,8 +27,70 @@ export const agentSlice = createSlice({
         /**
          * Change the currently selected Agent.
          */
-        updateBuff: (state, payload: PayloadAction<BuffValue>) => {
-            const buffs = state.agents[state.i].buffs2
+        createAgentBuff: (state) => {
+            const buff: BuffValue = {
+                key: "basicAtkFlat",
+                value: 0,
+                label: BuffLabels.basicAtkFlat,
+                description: "",
+                id: Math.random()
+            }
+            state.agents[state.i].agentBuffs.push(buff)
+        },
+        deleteAgentBuff: (state, payload: PayloadAction<number>) => {
+            const buffs = state.agents[state.i].agentBuffs
+            const buff = buffs.findIndex(x => x.id === payload.payload)
+            if (buff === -1) return
+            buffs.splice(buff, 1)
+        },
+        updateAgentBuff: (state, payload: PayloadAction<BuffValue>) => {
+            const buffs = state.agents[state.i].agentBuffs
+            const buff = buffs.findIndex(x => x.id === payload.payload.id)
+            buffs[buff] = payload.payload
+        },
+        createCustomBuff: (state) => {
+            const buff: BuffValue = {
+                key: "basicAtkFlat",
+                value: 0,
+                label: BuffLabels.basicAtkFlat,
+                description: "",
+                id: Math.random()
+            }
+            state.agents[state.i].customBuffs.push(buff)
+        },
+        deleteCustomBuff: (state, payload: PayloadAction<number>) => {
+            const buffs = state.agents[state.i].customBuffs
+            const buff = buffs.findIndex(x => x.id === payload.payload)
+            if (buff === -1) return
+            buffs.splice(buff, 1)
+        },
+        updateCustomBuff: (state, payload: PayloadAction<BuffValue>) => {
+            const buffs = state.agents[state.i].customBuffs
+            const buff = buffs.findIndex(x => x.id === payload.payload.id)
+            buffs[buff] = payload.payload
+        },
+        createWengineBuff: (state) => {
+            const buff: BuffValue = {
+                key: "basicAtkFlat",
+                value: 0,
+                label: BuffLabels.basicAtkFlat,
+                description: "",
+                id: Math.random()
+            }
+            state.agents[state.i].wengine?.buffs2.push(buff)
+        },
+        deleteWengineBuff: (state, payload: PayloadAction<number>) => {
+            const buffs = state.agents[state.i].wengine?.buffs2
+            if (buffs == undefined) return;
+
+            const buff = buffs.findIndex(x => x.id === payload.payload)
+            if (buff === -1) return
+            buffs.splice(buff, 1)
+        },
+        updateWengineBuff: (state, payload: PayloadAction<BuffValue>) => {
+            const buffs = state.agents[state.i].wengine?.buffs2
+            if (buffs == undefined) return;
+
             const buff = buffs.findIndex(x => x.id === payload.payload.id)
             buffs[buff] = payload.payload
         },

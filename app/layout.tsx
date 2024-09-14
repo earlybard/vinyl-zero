@@ -54,10 +54,15 @@ const NAVIGATION: Navigation = [
         icon: <KeyboardDoubleArrowUpIcon />,
       },
       {
-        segment: 'wengine',
-        title: 'W-Engine',
+        segment: 'stats',
+        title: 'Stat Weights',
         icon: <DonutSmallIcon />,
       },
+      // {
+      //   segment: 'wengine',
+      //   title: 'W-Engine',
+      //   icon: <DonutSmallIcon />,
+      // },
       {
         segment: 'enemy',
         title: 'Enemy',
