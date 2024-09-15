@@ -16,11 +16,14 @@ export interface DamageCalcs {
   penRatio: number
   defMultiplier: number
   attributeDamagePercent: number
-  critRate: number
-  critDmg: number
+  basicCritRate: number
+  finalCritRate: number
+  basicCritDmg: number
+  finalCritDmg: number
   critMultiplier: number
   resMultiplier: number
   anomaly: number
+  anomalyProficiency: number
   apBonus: number
   attackScale: number
   anomalyDamage: Record<AnomalyType, number>
@@ -53,25 +56,17 @@ export function damageCalc(agent: Agent, enemy: EnemyState): DamageCalcs {
     label: "Empty"
   }
 
-  const agentBuffs: BuffCounts = {...DefaultBuffCounts}
+  const buffs: BuffCounts = {...DefaultBuffCounts}
 
   for (let buff of agent.agentBuffs) {
-    agentBuffs[buff.key] = buff.value
+    buffs[buff.key] += buff.value
   }
-
-  const customBuffs: BuffCounts = {...DefaultBuffCounts}
-
   for (let buff of agent.customBuffs) {
-    customBuffs[buff.key] = buff.value
+    buffs[buff.key] += buff.value
   }
-
-  const wengineBuffs: BuffCounts = {...DefaultBuffCounts}
-
   for (let buff of wengine.buffs2) {
-    wengineBuffs[buff.key] = buff.value
+    buffs[buff.key] += buff.value
   }
-
-  let buffs = mergeBuffs(wengineBuffs, mergeBuffs(agentBuffs, customBuffs))
 
   const baseAttack = baseStats.atk + wengine.baseAttack;
 
@@ -107,19 +102,21 @@ export function damageCalc(agent: Agent, enemy: EnemyState): DamageCalcs {
   const allTypeResPercent = 0
   const resMultiplier = 1 - innateResPercent - allTypeResPercent + buffs.resShred
 
-  let critRate =
+  let basicCritRate =
     (mainstatCount.critRate * MainstatMultipliers.critRate) +
     (substatCount.critRate * SubstatMultipliers.critRate) +
-    baseStats.critRate +
-    buffs.critRate
+    baseStats.critRate
 
-  const critDmg =
+  let finalCritRate = basicCritRate + buffs.critRate
+
+  let basicCritDmg =
     (mainstatCount.critDmg * MainstatMultipliers.critDmg) +
     (substatCount.critDmg * SubstatMultipliers.critDmg) +
-    baseStats.critDmg +
-    buffs.critDmg
+    baseStats.critDmg
 
-  const critMultiplier = 1 + (critRate * critDmg)
+  const finalCritDmg = basicCritDmg + buffs.critDmg
+
+  const critMultiplier = 1 + (finalCritRate * finalCritDmg)
 
   const dmgTaken = 1 + buffs.dmgTaken
 
@@ -136,12 +133,13 @@ export function damageCalc(agent: Agent, enemy: EnemyState): DamageCalcs {
   // TODO set all my stats and see if it lines up?
   const ANOMALY_BUFF_LEVEL = 2;
 
-  const apBonus = (
+  const anomalyProficiency =
     (mainstatCount.anomalyProficiency * MainstatMultipliers.anomalyProficiency) +
     (substatCount.anomalyProficiency * SubstatMultipliers.anomalyProficiency) +
     buffs.anomalyProficiency +
     baseStats.anomalyProficiency
-  ) / 100
+
+  const apBonus = anomalyProficiency / 100
 
   // TODO values are very slightly different from the spreadsheet.
   // Might just be some rounding in Google sheets that I'm not doing.
@@ -174,11 +172,14 @@ export function damageCalc(agent: Agent, enemy: EnemyState): DamageCalcs {
     penRatio,
     defMultiplier,
     attributeDamagePercent,
-    critRate,
-    critDmg,
+    basicCritRate,
+    finalCritRate,
+    basicCritDmg,
+    finalCritDmg,
     critMultiplier,
     resMultiplier,
     anomaly,
+    anomalyProficiency,
     apBonus,
     attackScale,
     anomalyDamage

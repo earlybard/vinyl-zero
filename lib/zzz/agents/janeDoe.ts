@@ -20,7 +20,7 @@ export const JaneDoe: Agent = {
     critRate: 0.05,
     critDmg: 0.5,
     anomalyMastery: 148,
-    anomalyProficiency: 114,
+    anomalyProficiency: 114, // 114 + 100 + 90 +
     penRatio: 0,
     energyRegen: 0.012
   },
