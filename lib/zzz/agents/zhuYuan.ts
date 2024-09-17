@@ -32,6 +32,10 @@ export const ZhuYuan: Agent = {
   customBuffs: [
     buff("defShred", 0.4, "Nicole Core DEF Shred"),
     buff("attributeDamagePercent", 0.25, "Nicole Ether DMG%"),
+
+    buff("critRate", 0.08, "Woodpecker 2pc"),
+    buff("attributeDamagePercent", 0.1, "Chaotic Metal 2pc"),
+    buff("critDmg", 0.53, "Chaotic Metal 4pc")
   ],
 
   discDrives: DefaultDiscs.slice() as AgentDiscDrives,
