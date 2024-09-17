@@ -61,6 +61,16 @@ export interface BuffValue {
   description: string
 }
 
+export const buff = (key: Buff, value: number, description: string = ""): BuffValue => {
+  return {
+    id: Math.random(),
+    key: key,
+    label: BuffLabels[key],
+    description: description,
+    value: value
+  }
+}
+
 export const BuffOptions: BuffValue[] = Object.entries(BuffLabels).map(([k, v], i) => {
   return {
     id: i,

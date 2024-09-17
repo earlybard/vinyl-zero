@@ -2,9 +2,9 @@ import {
   DefaultAgentDriveMainstatCount
 } from "@/lib/zzz/stats/discStats";
 import {Agent} from "@/lib/zzz/core/Agent";
-import {DefaultBuffCounts} from "@/lib/zzz/buffs/buffs";
+import {buff, DefaultBuffCounts} from "@/lib/zzz/buffs/buffs";
 import {AgentDiscDrives, DefaultDiscs} from "@/lib/zzz/disc-drives/discDrive";
-import {SharpenedStinger} from "@/lib/zzz/wengine/wengines";
+import {SharpenedStinger, StarlightEngine} from "@/lib/zzz/wengine/wengines";
 
 export const ZhuYuan: Agent = {
   label: "Zhu Yuan",
@@ -12,24 +12,29 @@ export const ZhuYuan: Agent = {
   // TODO imagery/branding/colour per agent
   // TODO atk vs. anomaly vs. support etc
 
-  // PLACEHOLDER VALUES
   baseStats: {
-    def: 607,
-    hp: 7789,
-    atk: 1000,
+    def: 601,
+    hp: 7483,
+    atk: 919,
     critRate: 0.05,
-    critDmg: 0.5,
+    critDmg: 0.788,
     penRatio: 0,
-    impact: 86,
-    anomalyMastery: 150,
-    anomalyProficiency: 112,
+    impact: 90,
+    anomalyMastery: 93,
+    anomalyProficiency: 92,
     energyRegen: 0.012
   },
 
-  agentBuffs: [],
-  customBuffs: [],
+  agentBuffs: [
+    buff("attributeDamagePercent", 0.8, "Core DMG in stun"),
+    buff("critRate", 0.3, "Core crit rate after EX, Chain, Ult"),
+  ],
+  customBuffs: [
+    buff("defShred", 0.4, "Nicole Core DEF Shred"),
+    buff("attributeDamagePercent", 0.25, "Nicole Ether DMG%"),
+  ],
 
   discDrives: DefaultDiscs.slice() as AgentDiscDrives,
 
-  wengine: SharpenedStinger,
+  wengine: StarlightEngine,
 }

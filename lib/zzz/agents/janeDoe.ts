@@ -2,7 +2,7 @@ import {
   DefaultAgentDriveMainstatCount
 } from "@/lib/zzz/stats/discStats";
 import {Agent} from "@/lib/zzz/core/Agent";
-import {BuffLabels, DefaultBuffCounts} from "@/lib/zzz/buffs/buffs";
+import {buff, BuffLabels, DefaultBuffCounts} from "@/lib/zzz/buffs/buffs";
 import {AgentDiscDrives, DefaultDiscs, DefaultDiscValues} from "@/lib/zzz/disc-drives/discDrive";
 import {SharpenedStinger} from "@/lib/zzz/wengine/wengines";
 
@@ -27,61 +27,17 @@ export const JaneDoe: Agent = {
 
   // inherent buffs - non editable
   agentBuffs: [
-    {
-      id: 1,
-      key: "anomalyDamageMultiplier",
-      label: BuffLabels.anomalyDamageMultiplier,
-      value: 0.5,
-      description: "Assault Crit for +50% DMG"
-    },
-    {
-      id: 2,
-      key: "anomalyBuildupRate",
-      label: BuffLabels.anomalyBuildupRate,
-      value: 0.35,
-      description: "Core Passive"
-    },
-    {
-      id: 3,
-      key: "finalAtkFlat",
-      label: BuffLabels.finalAtkFlat,
-      value: 440,
-      description: "Core Passive"
-    }
+    buff("anomalyDamageMultiplier", 0.5, "Assault Crit for +50% DMG"),
+    buff("anomalyBuildupRate", 0.35, "Core Passive"),
+    buff("finalAtkFlat", 440, "Core Passive")
   ],
 
   customBuffs: [
-    {
-      id: 0,
-      key: "anomalyProficiency",
-      label: BuffLabels.anomalyProficiency,
-      value: 100,
-      description: "Seth Buff"
-    },
-    {
-      id: 1,
-      key: "anomalyProficiency",
-      label: BuffLabels.anomalyProficiency,
-      value: 30,
-      description: "Freedom Blues 2pc"
-    },
-    {
-      id: 2,
-      key: "attributeDamagePercent",
-      label: BuffLabels.attributeDamagePercent,
-      value: 0.1,
-      description: "Fanged Metal 2pc"
-    },
-    {
-      id: 3,
-      key: "dmgTaken",
-      label: BuffLabels.dmgTaken,
-      value: 0.35,
-      description: "Fanged Metal 4pc"
-    },
+    buff("anomalyProficiency", 100, "Seth Buff"),
+    buff("anomalyProficiency", 30, "Freedom Blues 2pc"),
+    buff("attributeDamagePercent", 0.1, "Fanged Metal 2pc"),
+    buff("dmgTaken", 0.35, "Fanged Metal 4pc")
   ],
-
-  // extra buffs -editable - empty array
 
   discDrives: DefaultDiscs.slice() as AgentDiscDrives,
 
