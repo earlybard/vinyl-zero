@@ -5,7 +5,8 @@ import {Wengine} from "@/lib/zzz/core/Wengine";
 
 export type AgentName =
   "Jane Doe" |
-  "Zhu Yuan"
+  "Zhu Yuan" |
+  "Burnice White"
 
 interface Attacks {
 

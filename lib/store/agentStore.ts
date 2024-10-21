@@ -6,6 +6,7 @@ import {DiscDrive, DriveMainstat, DriveSubstat, SubstatLevel} from "@/lib/zzz/di
 import {DriveMainstatLabel} from "@/lib/zzz/stats/discStats";
 import {Wengine} from "@/lib/zzz/core/Wengine";
 import {Buff, BuffLabels, BuffValue} from "@/lib/zzz/buffs/buffs";
+import {BurniceWhite} from "@/lib/zzz/agents/burniceWhite";
 
 export interface AgentState {
     agents: Agent[]
@@ -15,7 +16,8 @@ export interface AgentState {
 const initialState: AgentState = {
     agents: [
         JaneDoe,
-        ZhuYuan
+        ZhuYuan,
+        BurniceWhite
     ],
     i: 0
 }
