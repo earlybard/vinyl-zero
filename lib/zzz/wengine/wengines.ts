@@ -1,6 +1,15 @@
 import {Wengine} from "@/lib/zzz/core/Wengine";
 import {BuffLabels, buff} from "@/lib/zzz/buffs/buffs";
 
+export const WeepingGemini: Wengine = {
+  label: "Weeping Gemini",
+  baseAttack: 595,
+  buffs2: [
+    buff("basicAtkPercent", 0.25),
+    buff("anomalyProficiency", 144, "3 Stacks")
+  ]
+}
+
 export const RainforestGourmet: Wengine = {
   label: "Rainforest Gourmet",
   baseAttack: 595,
@@ -43,5 +52,6 @@ export const wengines = [
   SharpenedStinger,
   FusionCompiler,
   RainforestGourmet,
+  WeepingGemini,
   StarlightEngine
 ]
