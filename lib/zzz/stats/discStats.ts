@@ -1,4 +1,5 @@
-import {DriveMainstat, DriveSubstat} from "@/lib/zzz/disc-drives/discDrive";
+import {DriveMainstat, DriveSubstat, SubstatLevel} from "@/lib/zzz/disc-drives/discDrive";
+import {Buff, BuffLabels, BuffValue} from "@/lib/zzz/buffs/buffs";
 
 export const ODriveSubstat = {
   critDmg:  "Crit Damage",
@@ -11,6 +12,14 @@ export const ODriveSubstat = {
   defPercent:  "Def %",
   penFlat:  "Pen",
   anomalyProficiency:  "Anomaly Proficiency"
+}
+
+export const substat = (key: keyof typeof ODriveSubstat, level: SubstatLevel = 0): DriveSubstat => {
+  return {
+    key,
+    label: ODriveSubstat[key],
+    level
+  }
 }
 
 export const SubstatOptions: DriveSubstat[] = Object.entries(ODriveSubstat).map(([k, s]) =>
