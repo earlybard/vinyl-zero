@@ -39,6 +39,16 @@ export const FusionCompiler: Wengine = {
   ]
 }
 
+export const HailstormShrine: Wengine = {
+  label: "Hailstorm Shrine",
+  baseAttack: 743,
+  buffs2: [
+    buff("critRate", 0.24),
+    buff("critDmg", 0.5),
+    buff("attributeDamagePercent", 0.4)
+  ]
+}
+
 export const StarlightEngine: Wengine = {
   label: "Starlight Engine",
   baseAttack: 595,
@@ -53,5 +63,6 @@ export const wengines = [
   FusionCompiler,
   RainforestGourmet,
   WeepingGemini,
+  HailstormShrine,
   StarlightEngine
 ]

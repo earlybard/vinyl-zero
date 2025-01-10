@@ -1,5 +1,5 @@
 import {
-  DefaultAgentDriveMainstatCount
+  DefaultAgentDriveMainstatCount, Mainstats, substat
 } from "@/lib/zzz/stats/discStats";
 import {Agent} from "@/lib/zzz/core/Agent";
 import {buff, BuffLabels, DefaultBuffCounts} from "@/lib/zzz/buffs/buffs";
@@ -33,13 +33,53 @@ export const JaneDoe: Agent = {
   ],
 
   customBuffs: [
-    buff("anomalyProficiency", 100, "Seth Buff"),
-    buff("anomalyProficiency", 30, "Freedom Blues 2pc"),
+    buff("basicAtkPercent", 0.10, "Hormone 2pc"),
     buff("attributeDamagePercent", 0.1, "Fanged Metal 2pc"),
-    buff("dmgTaken", 0.35, "Fanged Metal 4pc")
+    buff("dmgTaken", 0.35, "Fanged Metal 4pc"),
+
+    // Caesar
+    buff("finalAtkFlat", 1000, "Caesar Core"),
+    buff("dmgTaken", 0.25, "Caesar Additional"),
   ],
 
-  discDrives: DefaultDiscs.slice() as AgentDiscDrives,
+  discDrives: [
+    {mainStat: Mainstats.hpFlat, subStats: [
+        substat("anomalyProficiency", 0),
+        substat("atkPercent", 1),
+        substat("penFlat", 0),
+        substat("atkFlat", 3)
+      ]},
+    {mainStat: Mainstats.atkFlat, subStats: [
+        substat("hpFlat", 0),
+        substat("critDmg", 1),
+        substat("anomalyProficiency", 0),
+        substat("atkPercent", 2),
+      ]},
+    {mainStat: Mainstats.defFlat, subStats: [
+        substat("atkPercent", 0),
+        substat("hpFlat", 1),
+        substat("critRate", 0),
+        substat("anomalyProficiency", 3),
+      ]},
+    {mainStat: Mainstats.anomalyProficiency, subStats: [
+        substat("atkPercent", 1),
+        substat("atkFlat", 2),
+        substat("defPercent", 1),
+        substat("hpFlat", 2),
+      ]},
+    {mainStat: Mainstats.attributeDamagePercent, subStats: [
+        substat("atkPercent", 1),
+        substat("penFlat", 1),
+        substat("defFlat", 1),
+        substat("anomalyProficiency", 2),
+      ]},
+    {mainStat: Mainstats.anomalyMastery, subStats: [
+        substat("critDmg", 2),
+        substat("atkFlat", 0),
+        substat("atkPercent", 0),
+        substat("anomalyProficiency", 2),
+      ]},
+  ],
 
   wengine: SharpenedStinger
 }

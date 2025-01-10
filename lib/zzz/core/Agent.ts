@@ -7,14 +7,16 @@ export type AgentName =
   "Jane Doe" |
   "Zhu Yuan" |
   "Burnice White" |
-  "Yanagi"
+  "Yanagi" |
+  "Hoshimi Miyabi" |
+  "Harumasa"
 
 interface Attacks {
 
 }
 
 export interface Agent {
-  label: AgentName
+  label: String
   baseStats: AgentBaseStats
   agentBuffs: BuffValue[]
   customBuffs: BuffValue[]

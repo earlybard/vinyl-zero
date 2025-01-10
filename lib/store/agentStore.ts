@@ -8,6 +8,9 @@ import {Wengine} from "@/lib/zzz/core/Wengine";
 import {Buff, BuffLabels, BuffValue} from "@/lib/zzz/buffs/buffs";
 import {BurniceWhite} from "@/lib/zzz/agents/burniceWhite";
 import {Yanagi} from "@/lib/zzz/agents/yanagi";
+import {HoshimiMiyabi} from "@/lib/zzz/agents/hoshimiMiyabi";
+import {Harumasa} from "@/lib/zzz/agents/harumasa";
+import {Harumasa2} from "@/lib/zzz/agents/harumasa2";
 
 export interface AgentState {
     agents: Agent[]
@@ -19,7 +22,10 @@ const initialState: AgentState = {
         JaneDoe,
         ZhuYuan,
         BurniceWhite,
-        Yanagi
+        Yanagi,
+        HoshimiMiyabi,
+        Harumasa,
+      Harumasa2
     ],
     i: 0
 }
