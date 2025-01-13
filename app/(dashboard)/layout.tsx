@@ -29,7 +29,7 @@ export default function Layout(props: { children: React.ReactNode }) {
         <Divider sx={{ pt: 2 }}/>
         <Grid2 container spacing={2} sx={{ pt: 2 }}>
           <TextField size="small" disabled label="Attack Scale" value={Math.round(damage.attackScale)}/>
-          <TextField size="small" disabled label="Assault Damage" value={Math.round(damage.anomalyDamage.assault)}/>
+          <TextField size="small" disabled label="Anomaly Scale" value={Math.round(damage.anomaly)}/>
         </Grid2>
         <Divider sx={{ my: 2 }}/>
         {props.children}
