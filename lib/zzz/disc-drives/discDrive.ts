@@ -4,7 +4,7 @@ import {
   DriveSubstatOption, Mainstats,
 } from "@/lib/zzz/stats/discStats";
 
-export type SubstatLevel = 0 | 1 | 2 | 3 | 4
+export type SubstatLevel = number
 
 export interface DriveSubstat {
   label: DriveSubstatOption

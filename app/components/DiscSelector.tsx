@@ -20,7 +20,7 @@ export function DiscSubstatSelector(props: {disc: number}) {
     setOpen(false);
   };
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: any) => {
     if (open) {
       if (e.key === 'ArrowDown') {
         e.preventDefault();
