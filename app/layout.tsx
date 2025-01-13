@@ -21,26 +21,26 @@ const NAVIGATION: Navigation = [
     kind: 'header',
     title: 'Main items',
   },
-  {
-    segment: '',
-    title: 'Dashboard',
-    icon: <DashboardIcon />,
-  },
   // {
+  //   segment: '',
+  //   title: 'Dashboard',
+  //   icon: <DashboardIcon />,
+  // },
+  // // {
   //   segment: 'agent',
   //   title: "Agent",
   //   icon: <PersonIcon />,
   //
   //   children: [
       {
-        segment: 'damage',
-        title: 'Damage',
-        icon: <PercentIcon />,
-      },
-      {
         segment: 'discs',
         title: 'Disc Drives',
         icon: <AlbumIcon />,
+      },
+      {
+        segment: 'stats',
+        title: 'Stats',
+        icon: <PercentIcon />,
       },
       // {
       //   segment: 'rotation',
@@ -53,7 +53,7 @@ const NAVIGATION: Navigation = [
         icon: <KeyboardDoubleArrowUpIcon />,
       },
       {
-        segment: 'stats',
+        segment: 'statweights',
         title: 'Stat Weights',
         icon: <DonutSmallIcon />,
       },
@@ -72,7 +72,7 @@ const NAVIGATION: Navigation = [
 ];
 
 const BRANDING = {
-  title: 'Floppy Disc Zero',
+  title: 'ZZZ Calculator v1',
 };
 
 const AUTHENTICATION = {

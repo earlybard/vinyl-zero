@@ -1,7 +1,7 @@
 import {Mainstats, substat} from "@/lib/zzz/stats/discStats";
 import {Agent} from "@/lib/zzz/core/Agent";
 import {buff} from "@/lib/zzz/buffs/buffs";
-import {HailstormShrine, StarlightEngine} from "@/lib/zzz/wengine/wengines";
+import {HailstormShrine, MarcatoDesire, StarlightEngine} from "@/lib/zzz/wengine/wengines";
 
 export const Harumasa: Agent = {
   label: "Harumasa",
@@ -30,11 +30,14 @@ export const Harumasa: Agent = {
   ],
 
   customBuffs: [
-    // buff("critRate", 0.08, "Woodpecker 2pc"),
+    // Thunder
     buff("attributeDamagePercent", 0.1, "Thunder 2pc"),
     buff("finalAtkPercent", 0.28, "Thunder 4pc"),
+
+    // Branch
     buff("critDmg", 0.16, "Branch 2pc"),
 
+    // Nicole
     buff("defShred", 0.4, "Nicole Core DEF Shred"),
     buff("critRate", 0.15, "Nicole C6")
   ],
@@ -48,8 +51,8 @@ export const Harumasa: Agent = {
     ]},
     {mainStat: Mainstats.atkFlat, subStats: [
         substat("critDmg", 1),
-        substat("critRate", 2),
-        substat("anomalyProficiency", 1),
+        substat("critRate", 1),
+        substat("atkPercent", 2),
     ]},
     {mainStat: Mainstats.defFlat, subStats: [
         substat("critRate", 0),
@@ -60,9 +63,8 @@ export const Harumasa: Agent = {
         substat("critRate", 2),
         substat("atkPercent", 1),
     ]},
-    {mainStat: Mainstats.atkPercent, subStats: [
-        substat("critRate", 3),
-        substat("atkFlat", 1),
+    {mainStat: Mainstats.attributeDamagePercent, subStats: [
+        substat("atkPercent", 3),
         substat("anomalyProficiency"),
       ]},
     {mainStat: Mainstats.atkPercent, subStats: [
@@ -72,5 +74,5 @@ export const Harumasa: Agent = {
     ]},
 ],
 
-  wengine: StarlightEngine
+  wengine: MarcatoDesire
 }

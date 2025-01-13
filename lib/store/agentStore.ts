@@ -10,7 +10,7 @@ import {BurniceWhite} from "@/lib/zzz/agents/burniceWhite";
 import {Yanagi} from "@/lib/zzz/agents/yanagi";
 import {HoshimiMiyabi} from "@/lib/zzz/agents/hoshimiMiyabi";
 import {Harumasa} from "@/lib/zzz/agents/harumasa";
-import {Harumasa2} from "@/lib/zzz/agents/harumasa2";
+import {Harumasa2} from "@/lib/zzz/agents/harumasa";
 
 export interface AgentState {
     agents: Agent[]
@@ -25,7 +25,6 @@ const initialState: AgentState = {
         Yanagi,
         HoshimiMiyabi,
         Harumasa,
-      Harumasa2
     ],
     i: 0
 }

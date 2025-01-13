@@ -33,7 +33,10 @@ export const JaneDoe: Agent = {
   ],
 
   customBuffs: [
+    // Hormone 2pc
     buff("basicAtkPercent", 0.10, "Hormone 2pc"),
+
+    // Fanged 4pc
     buff("attributeDamagePercent", 0.1, "Fanged Metal 2pc"),
     buff("dmgTaken", 0.35, "Fanged Metal 4pc"),
 

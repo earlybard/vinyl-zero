@@ -58,11 +58,22 @@ export const StarlightEngine: Wengine = {
   ]
 }
 
+export const MarcatoDesire: Wengine = {
+  label: "Marcato Desire",
+  baseAttack: 594,
+  buffs2: [
+    buff("critRate", 0.2),
+    buff("finalAtkPercent", 0.192)
+  ]
+}
+
+
 export const wengines = [
   SharpenedStinger,
   FusionCompiler,
   RainforestGourmet,
   WeepingGemini,
   HailstormShrine,
-  StarlightEngine
+  StarlightEngine,
+  MarcatoDesire,
 ]

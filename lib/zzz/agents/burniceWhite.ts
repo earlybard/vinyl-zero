@@ -7,7 +7,7 @@ import {AgentDiscDrives, DefaultDiscs, DefaultDiscValues} from "@/lib/zzz/disc-d
 import {FusionCompiler, SharpenedStinger, WeepingGemini} from "@/lib/zzz/wengine/wengines";
 
 export const BurniceWhite: Agent = {
-  label: "Burnice White",
+  label: "Burnice",
 
   // TODO imagery/branding/colour per agent
   // TODO atk vs. anomaly vs. support etc

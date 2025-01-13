@@ -1,97 +1,63 @@
-"use client"
-import {useAppSelector} from "@/lib/store/util/hooks";
-import {damageCalc, DamageCalcs} from "@/lib/zzz/damage/damage";
+"use client";
+import * as React from 'react';
 import {Divider, Grid2, TextField} from "@mui/material";
 import Typography from "@mui/material/Typography";
-import * as React from "react";
-import {Agent} from "@/lib/zzz/core/Agent";
-import {
-  DriveMainstatKey,
-  DriveSubstatOption,
-  ODriveMainstat,
-  ODriveSubstat,
-  SubstatOptions
-} from "@/lib/zzz/stats/discStats";
-import {SubstatMultipliers} from "@/lib/zzz/constants/statMultipliers";
+import {useAppSelector} from "@/lib/store/util/hooks";
+import {MainstatMultipliers, SubstatMultipliers} from "@/lib/zzz/constants/statMultipliers";
+import {AnomalyMultipliers, AnomalyType} from "@/lib/zzz/constants/anomaly";
+import {DefaultAgentDriveMainstatCount, DefaultAgentDriveSubstatCount} from "@/lib/zzz/stats/discStats";
+import {damageCalc} from "@/lib/zzz/damage/damage";
 
-export default function StatsPage() {
+export default function DamagePage() {
+
   const agent = useAppSelector(s => s.agent.agents[s.agent.i])
   const enemy = useAppSelector(s => s.enemy)
+
   const damage = damageCalc(agent, enemy)
-
-  const substatWeights: Record<DriveSubstatOption, DamageCalcs> = {}
-
-  // Compute stat weights by creating a copied agent with one additional substat of each type, and calculate its damage.
-  for (let [k, v] of Object.entries(ODriveSubstat)) {
-    let drivesCopy = structuredClone(agent.discDrives)
-    drivesCopy[0].subStats.push({key: k, label: v, level: 1})
-    let agentCopy = JSON.parse(JSON.stringify(agent))
-    agentCopy.discDrives = drivesCopy
-    substatWeights[v] = damageCalc(agentCopy, enemy)
-  }
-
-  const mainstatWeights: Record<DriveSubstatOption, DamageCalcs> = {}
-
-  for (let [k, v] of Object.entries(ODriveMainstat)) {
-    let drivesCopy = structuredClone(agent.discDrives)
-    drivesCopy[0].mainStat = {key: k as DriveMainstatKey, label: v}
-    let agentCopy = JSON.parse(JSON.stringify(agent))
-    agentCopy.discDrives = drivesCopy
-    mainstatWeights[v] = damageCalc(agentCopy, enemy)
-  }
 
   return (
     <>
-      <Grid2 container>
-        <Grid2 size={3}><Typography variant="h6">Substat Weights</Typography></Grid2>
-        <Grid2 size={9}><Typography>% Increase from a single extra substat of type:</Typography></Grid2>
+      <Grid2 container spacing={2}>
+        <TextField size="small" disabled label="Base AP" value={agent.baseStats.anomalyProficiency}/>
       </Grid2>
+      <Divider sx={{ pt: 2 }}/>
       <Grid2 container spacing={2} sx={{ pt: 2 }}>
-        {
-          Object.entries(substatWeights).map(([k, v]) =>
-            <StatWeights key={k} damage={damage} k={k} newDamage={v}/>
-          )
-        }
-        </Grid2>
-        <Divider sx={{my: 2}}/>
-        <Grid2 container>
-          <Grid2 size={3}><Typography variant="h6">Mainstat Weights</Typography></Grid2>
-          <Grid2 size={9}><Typography>% Increase from a single extra mainstat of type:</Typography></Grid2>
-        </Grid2>
-        <Grid2 container spacing={2} sx={{ pt: 2 }}>
-        {
-          Object.entries(mainstatWeights).map(([k, v]) =>
-            <StatWeights key={k} damage={damage} k={k} newDamage={v}/>
-          )
-        }
+        <TextField size="small" disabled label="Base Attack" value={Math.round(damage.baseAttack)}/>
+        <TextField size="small" disabled label="Basic Attack" value={Math.round(damage.basicAttack)}/>
+        <TextField size="small" disabled label="Final Attack" value={Math.round(damage.finalAttack)}/>
       </Grid2>
+      <Divider sx={{ pt: 2 }}/>
+      <Grid2 container spacing={2} sx={{ pt: 2 }}>
+        <TextField size="small" disabled label="Flat Pen" value={Math.round(damage.penFlat)}/>
+        <TextField size="small" disabled label="Pen Ratio" value={(damage.penRatio)}/>
+        <TextField size="small" disabled label="Def Multiplier" value={(damage.defMultiplier.toFixed(2))}/>
+        <TextField size="small" disabled label="Attribute Damage %" value={(damage.attributeDamagePercent)}/>
+      </Grid2>
+      <Divider sx={{ pt: 2 }}/>
+      <Grid2 container spacing={2} sx={{ pt: 2 }}>
+        <TextField size="small" disabled label="Basic Crit Rate" value={(damage.basicCritRate.toFixed(2))}/>
+        <TextField size="small" disabled label="Final Crit Rate" value={(damage.finalCritRate.toFixed(2))}/>
+        <TextField size="small" disabled label="Basic Crit Dmg" value={(damage.basicCritDmg.toFixed(2))}/>
+        <TextField size="small" disabled label="Final Crit Dmg" value={(damage.finalCritDmg.toFixed(2))}/>
+        <TextField size="small" disabled label="Crit Multiplier" value={(damage.critMultiplier.toFixed(2))}/>
+      </Grid2>
+      <Divider sx={{ pt: 2 }}/>
+      <Grid2 container spacing={2} sx={{ pt: 2 }}>
+        <TextField size="small" disabled label="Res Multiplier" value={(damage.resMultiplier)}/>
+        <TextField size="small" disabled label="Anomaly" value={Math.round(damage.anomaly)}/>
+        <TextField size="small" disabled label="Anomaly Proficiency" value={Math.round(damage.anomalyProficiency)}/>
+      </Grid2>
+      <Divider sx={{ pt: 2 }}/>
+      <Grid2 container spacing={2} sx={{ pt: 2 }}>
+        <TextField size="small" disabled label="Assault Damage" value={Math.round(damage.anomalyDamage.assault)}/>
+        <TextField size="small" disabled label="Shatter Damage" value={Math.round(damage.anomalyDamage.shatter)}/>
+        <TextField size="small" disabled label="Burn Damage" value={Math.round(damage.anomalyDamage.burn)}/>
+        <TextField size="small" disabled label="Corruption Damage" value={Math.round(damage.anomalyDamage.corruption)}/>
+        <TextField size="small" disabled label="Shock Damage" value={Math.round(damage.anomalyDamage.shock)}/>
+      </Grid2>
+      <Divider sx={{ pt: 2 }}/>
+      <Typography sx={{ p: 2 }}>Attack Scale is multiplied by skill values for the final damage per hit</Typography>
+      <TextField size="small" disabled label="Attack Scale" value={Math.round(damage.attackScale)}/>
     </>
-  )
-}
-
-function StatWeights(props: {
-  damage: DamageCalcs,
-  k: string,
-  newDamage: DamageCalcs
-}) {
-
-  if ([ODriveMainstat.hpFlat, ODriveMainstat.hpPercent, ODriveMainstat.defFlat, ODriveMainstat.defPercent].includes(props.k)) {
-    return (<></>)
-  }
-
-  let assaultGain = (props.newDamage.anomalyDamage.assault / props.damage.anomalyDamage.assault) - 1
-  let atkGain = (props.newDamage.attackScale / props.damage.attackScale) - 1
-
-  assaultGain = Math.round(assaultGain * 10000) / 100
-  atkGain = Math.round(atkGain * 10000) / 100
-
-  return (<>
-    <Grid2 container size={12}>
-      <Grid2 size={3}>
-        <Typography>{props.k}</Typography>
-      </Grid2>
-      <TextField size="small" disabled label="ATK Scale Gain" value={atkGain + "%"}/>
-      <TextField size="small" disabled label="Assault Gain" value={assaultGain + "%"}/>
-    </Grid2>
-  </>)
+  );
 }

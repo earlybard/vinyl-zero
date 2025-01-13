@@ -4,7 +4,7 @@ import {buff} from "@/lib/zzz/buffs/buffs";
 import {HailstormShrine} from "@/lib/zzz/wengine/wengines";
 
 export const HoshimiMiyabi: Agent = {
-  label: "Hoshimi Miyabi",
+  label: "Miyabi",
 
   // TODO imagery/branding/colour per agent
   // TODO atk vs. anomaly vs. support etc
@@ -31,11 +31,16 @@ export const HoshimiMiyabi: Agent = {
 
   customBuffs: [
     // buff("critRate", 0.08, "Woodpecker 2pc"),
+
+    // Hormone 2pc
     buff("basicAtkPercent", 0.10, "Hormone 2pc"),
+
+    // Branch
     buff("critDmg", 0.16, "Branch 2pc"),
     buff("critDmg", 0.3, "Branch 4pc"),
     buff("critRate", 0.12, "Branch 4pc"),
 
+    // Lucy
     buff("finalAtkFlat", 600, "Lucy Cheer On"),
     buff("critDmg", 0.1, "Lucy Cheer On"),
   ],

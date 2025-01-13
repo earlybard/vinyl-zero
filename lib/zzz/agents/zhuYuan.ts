@@ -32,6 +32,7 @@ export const ZhuYuan: Agent = {
   customBuffs: [
     buff("defShred", 0.4, "Nicole Core DEF Shred"),
     buff("attributeDamagePercent", 0.25, "Nicole Ether DMG%"),
+    buff("critRate", 0.15, "Nicole C6"),
 
     buff("critRate", 0.08, "Woodpecker 2pc"),
     buff("attributeDamagePercent", 0.1, "Chaotic Metal 2pc"),

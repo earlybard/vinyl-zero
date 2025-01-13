@@ -30,13 +30,16 @@ export const Yanagi: Agent = {
   ],
 
   customBuffs: [
+    // Chaos Jazz
     buff("anomalyProficiency", 30, "Chaos Jazz 2pc"),
     buff("attributeDamagePercent", 0.15, "Chaos Jazz 4pc"),
+
+    // TM
     buff("attributeDamagePercent", 0.1, "Thunder Metal 2pc"),
 
-    // Caesar
-    buff("finalAtkFlat", 1000, "Caesar Core"),
-    buff("dmgTaken", 0.25, "Caesar Additional")
+    // Lucy
+    buff("finalAtkFlat", 600, "Lucy Cheer On"),
+    buff("critDmg", 0.1, "Lucy Cheer On"),
   ],
 
   discDrives: DefaultDiscs.slice() as AgentDiscDrives,
