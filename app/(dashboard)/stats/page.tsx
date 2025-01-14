@@ -30,16 +30,16 @@ export default function DamagePage() {
       <Grid2 container spacing={2} sx={{ pt: 2 }}>
         <TextField size="small" disabled label="Flat Pen" value={Math.round(damage.penFlat)}/>
         <TextField size="small" disabled label="Pen Ratio" value={(damage.penRatio)}/>
-        <TextField size="small" disabled label="Def Multiplier" value={(damage.defMultiplier.toFixed(2))}/>
+        <TextField size="small" disabled label="Def Multiplier" value={(damage.defMultiplier.toFixed(3))}/>
         <TextField size="small" disabled label="Attribute Damage %" value={(damage.attributeDamagePercent)}/>
       </Grid2>
       <Divider sx={{ pt: 2 }}/>
       <Grid2 container spacing={2} sx={{ pt: 2 }}>
-        <TextField size="small" disabled label="Basic Crit Rate" value={(damage.basicCritRate.toFixed(2))}/>
-        <TextField size="small" disabled label="Final Crit Rate" value={(damage.finalCritRate.toFixed(2))}/>
-        <TextField size="small" disabled label="Basic Crit Dmg" value={(damage.basicCritDmg.toFixed(2))}/>
-        <TextField size="small" disabled label="Final Crit Dmg" value={(damage.finalCritDmg.toFixed(2))}/>
-        <TextField size="small" disabled label="Crit Multiplier" value={(damage.critMultiplier.toFixed(2))}/>
+        <TextField size="small" disabled label="Basic Crit Rate" value={(damage.basicCritRate.toFixed(3))}/>
+        <TextField size="small" disabled label="Final Crit Rate" value={(damage.finalCritRate.toFixed(3))}/>
+        <TextField size="small" disabled label="Basic Crit Dmg" value={(damage.basicCritDmg.toFixed(3))}/>
+        <TextField size="small" disabled label="Final Crit Dmg" value={(damage.finalCritDmg.toFixed(3))}/>
+        <TextField size="small" disabled label="Crit Multiplier" value={(damage.critMultiplier.toFixed(3))}/>
       </Grid2>
       <Divider sx={{ pt: 2 }}/>
       <Grid2 container spacing={2} sx={{ pt: 2 }}>
