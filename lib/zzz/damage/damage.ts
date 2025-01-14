@@ -107,7 +107,7 @@ export function damageCalc(agent: Agent, enemy: EnemyState): DamageCalcs {
     (substatCount.critRate * SubstatMultipliers.critRate) +
     baseStats.critRate
 
-  let finalCritRate = basicCritRate + buffs.critRate
+  let finalCritRate = Math.min(1, basicCritRate + buffs.critRate)
 
   let basicCritDmg =
     (mainstatCount.critDmg * MainstatMultipliers.critDmg) +
